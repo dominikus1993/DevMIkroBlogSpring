@@ -1,8 +1,8 @@
 package com.devmikroblog.controllers
 
 import com.devmikroblog.model.Result
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 /**
@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 class HelloController{
 
-    @RequestMapping("/hello")
-    fun greeting(@RequestParam(value = "name", defaultValue = "World") name: String): Result<String> {
-        return Result(name)
+    @RequestMapping("/hello/{name}")
+    fun greeting(@PathVariable name: String): Result<String> {
+        return Result("hello ${name}")
     }
 }
