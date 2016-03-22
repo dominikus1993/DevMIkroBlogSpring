@@ -1,5 +1,6 @@
 package com.devmikroblog.controllers
 
+
 import com.devmikroblog.model.Result
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
@@ -13,6 +14,6 @@ class HelloController{
 
     @RequestMapping("/hello/{name}")
     fun greeting(@PathVariable name: String): Result<String> {
-        return Result("hello ${name}")
+        return Result("hello $name")
     }
 }
