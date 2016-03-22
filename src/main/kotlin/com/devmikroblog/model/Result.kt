@@ -3,4 +3,6 @@ package com.devmikroblog.model
 /**
  * Created by pnet-46 on 22.03.16.
  */
-data class Result<T>(val value:T)
+class Result<T> constructor(val value:T){
+    val isSuccess:Boolean = value != null;
+}
