@@ -1,0 +1,22 @@
+{
+  "name": "DevMikroblogSpring",
+  "homepage": "https://github.com/dominikus1993/DevMikroblogSpring",
+  "authors": [
+    "dominikus1993 <dominiksu1910@gmail.com>"
+  ],
+  "dependencies": {
+    "angular": "1.5.2",
+    "jquery": "^2.2.2"
+  },
+  "description": "spring app",
+  "main": "main.js",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
