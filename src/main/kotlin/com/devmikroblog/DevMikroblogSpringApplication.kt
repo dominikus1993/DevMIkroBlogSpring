@@ -1,5 +1,7 @@
 package com.devmikroblog
 
+import com.devmikroblog.model.Post
+import com.devmikroblog.model.Result
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration
 import org.springframework.boot.autoconfigure.SpringBootApplication
