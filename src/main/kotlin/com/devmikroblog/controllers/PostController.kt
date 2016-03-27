@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController
 class PostController{
     private val service:IPostService
 
+
     @Autowired
     constructor(service: IPostService){
         this.service = service

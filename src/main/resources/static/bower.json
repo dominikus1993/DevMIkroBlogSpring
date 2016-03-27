@@ -6,7 +6,8 @@
   ],
   "dependencies": {
     "angular": "1.5.2",
-    "jquery": "^2.2.2"
+    "jquery": "^2.2.2",
+    "bootstrap":"3.3.5"
   },
   "description": "spring app",
   "main": "main.js",

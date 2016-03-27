@@ -1,10 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="devmikroblog">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
 </head>
 <body>
-    <h1>Dupa</h1>
+    <div class="container">
+        <div ng-controller="HomeController as home">
+            <p> The Id is {{home.greeting.id}}</p>
+            <p> The content is {{home.greeting.content}}</p>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script type="text/javascript" src="bower_components/angular/angular.js"></script>
+    <script type="text/javascript" src="js/src/main.js"></script>
+    <script type="text/javascript" src="js/src/homeController.js"></script>
 </body>
 </html>

@@ -10,8 +10,8 @@ var watch = require("gulp-watch");
 var tsb = require('gulp-tsb');
 var notify = require('gulp-notify');
 
-var tsFiles = ["typings/**/*.ts", "*.ts", "*.ts"];
-var jsFiles = ["*.js", "*.js", "!node_modules/**/*.js"];
+var tsFiles = ["typings/**/*.ts", "src/**/*.ts"];
+var jsFiles = ["src/**/*.js", "!node_modules/**/*.js"];
 var compilation = tsb.create({
     target: 'es6',
     module: 'commonjs',
