@@ -1,4 +1,4 @@
-///<reference path="../typings/tsd.d.ts"/>
+///<reference path="tsd.d.ts"/>
 
 module DevMikroblog.Controllers{
     export class HomeController{

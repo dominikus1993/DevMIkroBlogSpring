@@ -6,6 +6,13 @@
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
 </head>
 <body>
+    <div ng-controller="NavigationController as navigation" class="container">
+        <ul class="nav nav-pills" role="tablist">
+            <li class="active"><a href="#/">Home</a></li>
+            <li><a href="#/login">Login</a></li>
+            <li ng-show="authenticated"><a href="" ng-click="logout()">logout</a></li>
+        </ul>
+    </div>
     <div class="container">
         <div ng-controller="HomeController as home">
             <p> The Id is {{home.greeting.id}}</p>
