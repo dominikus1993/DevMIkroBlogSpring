@@ -4,6 +4,7 @@ import com.devmikroblog.model.Post
 import com.devmikroblog.model.Result
 import com.devmikroblog.services.interfaces.IPostService
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController
  */
 
 @RestController
+@EnableRedisHttpSession
 @RequestMapping("/api/post")
 class PostController{
     private val service:IPostService
