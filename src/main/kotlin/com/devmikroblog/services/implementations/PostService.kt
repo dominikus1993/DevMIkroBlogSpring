@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service
  * Created by dominik on 22.03.16.
  */
 @Service
-class PostService :IPostService {
+class PostService : IPostService {
     private val postRepository:IPostRepository;
 
     @Autowired

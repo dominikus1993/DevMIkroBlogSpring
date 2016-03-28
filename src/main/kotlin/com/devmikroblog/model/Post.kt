@@ -60,7 +60,7 @@ open class Post():Serializable{
             set
 
     var votes:List<Vote> = listOf()
-    @OneToMany(mappedBy = "vote")
+    @OneToMany(mappedBy = "post")
     get
     set
 
