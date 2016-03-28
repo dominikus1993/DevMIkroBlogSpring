@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.web.csrf.CsrfFilter
 import org.springframework.security.web.csrf.CsrfTokenRepository
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher
 import javax.activation.DataSource
 
 /**
@@ -22,19 +23,19 @@ class SecurityConfiguration : WebSecurityConfigurerAdapter() {
     @Autowired
     private var dataSource:DataSource? = null;
 
-
-
     override fun configure(auth: AuthenticationManagerBuilder?) {
         auth?.jdbcAuthentication()?.dataSource(dataSource as javax.sql.DataSource)
                 ?.usersByUsernameQuery("select username, password from Users where username=?")
-                ?.authoritiesByUsernameQuery("select username from Users where username=?")
+                ?.authoritiesByUsernameQuery("select username role from Users where username=?")
     }
 
     override fun configure(http: HttpSecurity?) {
         http?.httpBasic()?.and()?.authorizeRequests()
-                ?.antMatchers("/index.html", "/home.html", "/login.html", "/")?.permitAll()
-                ?.anyRequest()?.authenticated()?.and()?.addFilterAfter(CsrfHeaderFilter(), CsrfFilter::class.java)
-                ?.csrf()?.csrfTokenRepository(csrfTokenRepositoryGet())?.and()?.logout();
+                ?.antMatchers("/index", "/home", "/")?.permitAll()
+                ?.anyRequest()?.authenticated()?.and()?.formLogin()?.loginPage("/login")
+                ?.permitAll()?.and()?.logout()?.logoutRequestMatcher(AntPathRequestMatcher("/logout"))
+                ?.permitAll()
+                ?.and()?.csrf()?.disable()
     }
 
     private fun csrfTokenRepositoryGet():CsrfTokenRepository{
