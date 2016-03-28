@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component
 import org.springframework.web.filter.OncePerRequestFilter
 import org.springframework.web.util.WebUtils
 import javax.servlet.FilterChain
+import javax.servlet.http.Cookie
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
@@ -22,9 +23,11 @@ class CsrfHeaderFilter : OncePerRequestFilter() {
             var token = csrf.token
 
             if(cookie == null || token != null && !token.equals(cookie.value)){
-
+                cookie = Cookie("XSRF-TOKEN", token)
+                cookie.path = "/"
+                res?.addCookie(cookie)
             }
         }
+        chain?.doFilter(req, res)
     }
-
 }
