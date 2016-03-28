@@ -43,7 +43,14 @@ open class Post():Serializable{
     var author:User = User()
     @NotNull
     @ManyToOne
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    get
+    set
+
+    var comments:List<Post> = listOf()
+    @ManyToMany(cascade = arrayOf(CascadeType.ALL), fetch = FetchType.EAGER)
+    @JoinTable(name = "PostsComments",
+            joinColumns = arrayOf(JoinColumn(name = "PostId")),
+            inverseJoinColumns = arrayOf(JoinColumn(name = "CommentsId")))
     get
     set
 

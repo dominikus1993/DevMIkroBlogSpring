@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController
  */
 
 @RestController
-@EnableRedisHttpSession
 @RequestMapping("/api/post")
 class PostController{
     private val service:IPostService

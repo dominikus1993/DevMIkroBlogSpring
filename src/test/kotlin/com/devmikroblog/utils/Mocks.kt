@@ -1,6 +1,7 @@
 package com.devmikroblog.utils
 
 import com.devmikroblog.model.Post
+import com.devmikroblog.model.User
 import com.devmikroblog.repositories.interfaces.IPostRepository
 import org.mockito.Mockito.*;
 import javax.sql.rowset.Predicate
@@ -11,8 +12,8 @@ import javax.sql.rowset.Predicate
 object Mocks {
     fun getIPostRepositoryMock(): IPostRepository{
         val mockRes = mock(IPostRepository::class.java);
-        `when`(mockRes.read()).thenReturn(arrayListOf(Post(1, "Test", 0)));
-        `when`(mockRes.read{it -> it.id == 1}).thenReturn(Post(1,"Test", 0))
+        `when`(mockRes.read()).thenReturn(arrayListOf(Post(1, "Test", 0, User())));
+        `when`(mockRes.read{it -> it.id == 1}).thenReturn(Post(1,"Test", 0, User()))
         return mockRes;
     }
 }

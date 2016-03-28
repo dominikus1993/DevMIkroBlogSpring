@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.core.annotation.Order
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 import org.springframework.security.web.csrf.CsrfFilter
 import org.springframework.security.web.csrf.CsrfTokenRepository
@@ -17,16 +18,15 @@ import javax.activation.DataSource
  * Created by dominik on 27.03.16.
  */
 @Configuration
+@EnableWebSecurity
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
-class SecurityConfiguration : WebSecurityConfigurerAdapter() {
-
-    @Autowired
-    private var dataSource:DataSource? = null;
+open class SecurityConfiguration : WebSecurityConfigurerAdapter() {
 
     override fun configure(auth: AuthenticationManagerBuilder?) {
-        auth?.jdbcAuthentication()?.dataSource(dataSource as javax.sql.DataSource)
-                ?.usersByUsernameQuery("select username, password from Users where username=?")
-                ?.authoritiesByUsernameQuery("select username role from Users where username=?")
+//        auth?.jdbcAuthentication()?.dataSource(dataSource as javax.sql.DataSource)
+//                ?.usersByUsernameQuery("select username, password from Users where username=?")
+//                ?.authoritiesByUsernameQuery("select username role from Users where username=?")
+        super.configure(auth)
     }
 
     override fun configure(http: HttpSecurity?) {

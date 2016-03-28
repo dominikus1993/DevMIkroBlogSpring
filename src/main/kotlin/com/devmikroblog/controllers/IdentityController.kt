@@ -9,7 +9,6 @@ import java.security.Principal
  * Created by dominik on 27.03.16.
  */
 @RestController
-@EnableRedisHttpSession
 @RequestMapping("/api/auth")
 class IdentityController {
     fun user(user:Principal):Principal{

@@ -32,20 +32,17 @@ open class User(): Serializable {
     var username:String = ""
         @NotNull
         @Column(unique = true)
-        @JsonProperty(access = JsonProperty.Access.READ_WRITE)
         get
         set
 
     var password:String = ""
         @NotNull
-        @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
         get
         set
 
     var posts:List<Post> = listOf()
         @OneToMany(cascade = arrayOf(CascadeType.ALL))
         @LazyCollection(LazyCollectionOption.FALSE)
-        @JsonProperty(access = JsonProperty.Access.READ_ONLY)
         get
         set
 
