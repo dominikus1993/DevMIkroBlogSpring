@@ -14,11 +14,12 @@ import javax.validation.constraints.NotNull
 @Entity
 @Table(name = "Users")
 open class User(): Serializable {
-    constructor(id:Int, username:String, password:String, posts:List<Post>) : this(){
+    constructor(id:Int, username:String, password:String, posts:List<Post>, role: Role) : this(){
         this.id = id;
         this.username = username;
         this.password = password;
         this.posts = posts;
+        this.role = role;
     }
 
     var id:Int = 0
@@ -47,6 +48,10 @@ open class User(): Serializable {
         @JsonProperty(access = JsonProperty.Access.READ_ONLY)
         get
         set
+
+    var role:Role = Role.USER
+        @NotNull
+        get
 
     override fun toString(): String {
         return "[id=$id, username=$username, password=$password]";
