@@ -1,11 +1,6 @@
 package com.devmikroblog.model
 
-import com.fasterxml.jackson.annotation.JsonProperty
-import org.hibernate.annotations.LazyCollection
-import org.hibernate.annotations.LazyCollectionOption
-import org.hibernate.validator.constraints.Length
 import java.io.Serializable
-import java.util.*
 import javax.persistence.*
 import javax.validation.constraints.NotNull
 
@@ -16,11 +11,13 @@ import javax.validation.constraints.NotNull
 @Table(name = "Posts")
 open class Post():Serializable{
 
-    constructor(id:Int, message:String, rate: Int, author:User) : this(){
+    constructor(id:Int, message:String, rate: Int, author:User, comments:List<Post>, tags:List<Tag>) : this(){
         this.id = id;
         this.message = message;
         this.rate = rate;
         this.author = author;
+        this.comments = comments;
+        this.tags = tags;
     }
 
     var id:Int = 0
@@ -51,6 +48,19 @@ open class Post():Serializable{
     @JoinTable(name = "PostsComments",
             joinColumns = arrayOf(JoinColumn(name = "PostId")),
             inverseJoinColumns = arrayOf(JoinColumn(name = "CommentsId")))
+    get
+    set
+
+    var tags:List<Tag> = listOf()
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "PostsTags",
+            joinColumns = arrayOf(JoinColumn(name = "PostId")),
+            inverseJoinColumns = arrayOf(JoinColumn(name = "TagId")))
+            get
+            set
+
+    var votes:List<Vote> = listOf()
+    @OneToMany(mappedBy = "vote")
     get
     set
 

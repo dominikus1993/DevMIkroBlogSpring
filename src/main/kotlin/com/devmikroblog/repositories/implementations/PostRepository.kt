@@ -2,6 +2,7 @@ package com.devmikroblog.repositories.implementations
 
 import com.devmikroblog.model.Post
 import com.devmikroblog.model.Role
+import com.devmikroblog.model.Tag
 import com.devmikroblog.model.User
 import com.devmikroblog.repositories.BaseRepository
 import com.devmikroblog.repositories.interfaces.IPostRepository
@@ -13,7 +14,7 @@ import org.springframework.stereotype.Repository
 @Repository
 open class PostRepository : BaseRepository<Post>(),IPostRepository {
     override fun read(): List<Post>? {
-        return arrayListOf(Post(1,"ahsdffgdas", 34343, User()), Post(2, "hello world", 0, User()))
+        return arrayListOf(Post(1,"ahsdffgdas", 34343, User(), listOf(), listOf()), Post(2, "hello world", 0, User(), listOf(), listOf()))
     }
 
     override fun read(predicate: (Post) -> Boolean): Post? {

@@ -21,11 +21,11 @@ class PostService :IPostService {
 
 
     override fun getAll(): Result<List<Post>?> {
-        return Result(postRepository.read())
+        return Result.ErrorWhenNoData(postRepository.read())
     }
 
     override fun getBy(predicate: (Post) -> Boolean): Result<Post?> {
-        return Result(postRepository.read(predicate))
+        return Result.ErrorWhenNoData(postRepository.read(predicate))
     }
 
     override fun create(post: Post): Result<Post?> {
