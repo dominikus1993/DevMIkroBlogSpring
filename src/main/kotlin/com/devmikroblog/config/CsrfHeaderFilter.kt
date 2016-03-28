@@ -1,6 +1,5 @@
 package com.devmikroblog.config
 
-import com.devmikroblog.token
 import org.springframework.core.annotation.Order
 import org.springframework.security.web.csrf.CsrfToken
 import org.springframework.stereotype.Component

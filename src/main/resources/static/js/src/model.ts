@@ -10,4 +10,8 @@ module DevMikroblog.Models{
         public password:string = "";
         public isRemember:boolean = true;
     }
+
+    export class Post{
+
+    }
 }
