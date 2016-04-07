@@ -23,7 +23,7 @@ open class PostRepository : BaseRepository<Post>, IPostRepository {
     }
 
     override fun read(): List<Post>? {
-        return arrayListOf(Post(1,"ahsdffgdas", 34343, User(), listOf(), listOf()), Post(2, "hello world", 0, User(), listOf(), listOf()))
+        return (getCurrentSession().createCriteria(Post::class.java).list() as List<Post>)
     }
 
     override fun read(predicate: (Post) -> Boolean): Post? {
@@ -32,15 +32,38 @@ open class PostRepository : BaseRepository<Post>, IPostRepository {
     }
 
     override fun create(post: Post?): Boolean {
-        throw UnsupportedOperationException()
+        try{
+            getCurrentSession().save(post);
+            return true
+        }catch(ex:Exception){
+            return false
+        }
     }
 
     override fun update(post: Post?): Boolean {
-        throw UnsupportedOperationException()
+        try{
+            val session = getCurrentSession()
+            session.beginTransaction();
+            session.update(post);
+            session.transaction.commit();
+            session.close();
+            return true
+        }catch(ex:Exception){
+            return false
+        }
+
+
     }
 
     override fun delete(post: Post?): Boolean {
-        throw UnsupportedOperationException()
+        try{
+            val session = getCurrentSession()
+            val post = session.get(Post::class.java, post?.id)
+            session.delete(post)
+            return true
+        } catch(ex:Exception){
+            return false
+        }
     }
 
 }
