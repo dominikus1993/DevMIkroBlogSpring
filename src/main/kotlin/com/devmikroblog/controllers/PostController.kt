@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/api/post")
-class PostController{
+class PostController : BaseController{
     private val service:IPostService
 
 
     @Autowired
-    constructor(service: IPostService){
+    constructor(service: IPostService) : super(){
         this.service = service
     }
 

@@ -10,7 +10,12 @@ import java.security.Principal
  */
 @RestController
 @RequestMapping("/api/auth")
-class IdentityController {
+class IdentityController : BaseController{
+
+    constructor() : super(){
+
+    }
+
     fun user(user:Principal):Principal{
         return user;
     }
