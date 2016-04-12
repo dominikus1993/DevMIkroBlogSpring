@@ -1,5 +1,6 @@
 package com.devmikroblog.model
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
 import org.hibernate.annotations.LazyCollection
 import org.hibernate.annotations.LazyCollectionOption
@@ -40,6 +41,12 @@ open class User(): Serializable {
         get
         set
 
+    var activated = false
+        @NotNull
+        @Column(nullable = false)
+        get
+        set
+
     var posts:List<Post> = listOf()
         @OneToMany(cascade = arrayOf(CascadeType.ALL))
         @LazyCollection(LazyCollectionOption.FALSE)
@@ -49,6 +56,11 @@ open class User(): Serializable {
     var role:Role = Role.USER
         @NotNull
         get
+        set
+
+    var persistentTokens:Set<Token> = setOf()
+        @JsonIgnore
+        @OneToMany(cascade = arrayOf(CascadeType.ALL), orphanRemoval = true, mappedBy = "user")
 
     override fun toString(): String {
         return "[id=$id, username=$username, password=$password]";

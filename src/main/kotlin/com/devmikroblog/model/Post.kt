@@ -38,31 +38,31 @@ open class Post():Serializable{
         set
 
     var author:User = User()
-    @NotNull
-    @ManyToOne
-    get
-    set
+        @NotNull
+        @ManyToOne
+        get
+        set
 
     var comments:List<Post> = listOf()
-    @ManyToMany(cascade = arrayOf(CascadeType.ALL), fetch = FetchType.EAGER)
-    @JoinTable(name = "PostsComments",
+        @ManyToMany(cascade = arrayOf(CascadeType.ALL), fetch = FetchType.EAGER)
+        @JoinTable(name = "PostsComments",
             joinColumns = arrayOf(JoinColumn(name = "PostId")),
             inverseJoinColumns = arrayOf(JoinColumn(name = "CommentsId")))
-    get
-    set
+        get
+        set
 
     var tags:List<Tag> = listOf()
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "PostsTags",
+        @ManyToMany(fetch = FetchType.EAGER)
+        @JoinTable(name = "PostsTags",
             joinColumns = arrayOf(JoinColumn(name = "PostId")),
             inverseJoinColumns = arrayOf(JoinColumn(name = "TagId")))
-            get
-            set
+        get
+        set
 
     var votes:List<Vote> = listOf()
-    @OneToMany(mappedBy = "post")
-    get
-    set
+        @OneToMany(mappedBy = "post")
+        get
+        set
 
     override fun toString(): String {
         return "[id=$id, message=$message, rate=$rate]";
