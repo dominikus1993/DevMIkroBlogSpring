@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.security.SecurityProperties
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.annotation.Order
+import org.springframework.http.HttpMethod
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
+import org.springframework.security.config.annotation.web.builders.WebSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 import org.springframework.security.web.csrf.CsrfFilter
@@ -29,13 +31,20 @@ open class SecurityConfiguration : WebSecurityConfigurerAdapter() {
         super.configure(auth)
     }
 
+
+    override  fun configure(web: WebSecurity){
+        web.ignoring()
+                .antMatchers(HttpMethod.OPTIONS, "/**")
+                .antMatchers("/app/**/*.{js,html}")
+                .antMatchers("/bower_components/**")
+                .antMatchers("/i18n/**")
+                .antMatchers("/content/**")
+                .antMatchers("/swagger-ui/index.html")
+                .antMatchers("/test/**");
+    }
+
     override fun configure(http: HttpSecurity?) {
-        http?.httpBasic()?.and()?.authorizeRequests()
-                ?.antMatchers("/index", "/home", "/")?.permitAll()
-                ?.anyRequest()?.authenticated()?.and()?.formLogin()?.loginPage("/login")
-                ?.permitAll()?.and()?.logout()?.logoutRequestMatcher(AntPathRequestMatcher("/logout"))
-                ?.permitAll()
-                ?.and()?.csrf()?.disable()
+        http?.csrf()?.and()?.addFilterAfter(CsrfFilter(),)
     }
 
     private fun csrfTokenRepositoryGet():CsrfTokenRepository{
