@@ -44,7 +44,12 @@ open class SecurityConfiguration : WebSecurityConfigurerAdapter() {
     }
 
     override fun configure(http: HttpSecurity?) {
-        http?.csrf()?.and()?.addFilterAfter(CsrfFilter(),)
+        http?.httpBasic()?.and()?.authorizeRequests()
+                ?.antMatchers("/index", "/home", "/")?.permitAll()
+                ?.anyRequest()?.authenticated()?.and()?.formLogin()?.loginPage("/login")
+                ?.permitAll()?.and()?.logout()?.logoutRequestMatcher(AntPathRequestMatcher("/logout"))
+                ?.permitAll()
+                ?.and()?.csrf()?.disable()
     }
 
     private fun csrfTokenRepositoryGet():CsrfTokenRepository{
