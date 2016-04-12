@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
 import org.hibernate.annotations.LazyCollection
 import org.hibernate.annotations.LazyCollectionOption
+import org.springframework.security.core.GrantedAuthority
+import org.springframework.security.core.userdetails.UserDetails
 import java.io.Serializable
 import javax.persistence.*
 import javax.validation.constraints.NotNull
@@ -14,11 +16,29 @@ import javax.validation.constraints.NotNull
  */
 @Entity
 @Table(name = "Users")
-open class User(): Serializable {
-    constructor(id:Int, username:String, password:String, posts:List<Post>, role: Role) : this(){
+public class User(): UserDetails {
+
+    override fun getPassword(): String? = userPassword
+
+    override fun getUsername(): String? = login
+
+
+    override fun isCredentialsNonExpired(): Boolean = true
+
+    override fun isAccountNonExpired(): Boolean = true
+
+    override fun isAccountNonLocked(): Boolean = true
+
+    override fun getAuthorities(): MutableCollection<out GrantedAuthority>? {
+        throw UnsupportedOperationException()
+    }
+
+    override fun isEnabled(): Boolean = activated
+
+    constructor(id:Int, login:String, userPassword:String, posts:List<Post>, role: Role) : this(){
         this.id = id;
-        this.username = username;
-        this.password = password;
+        this.login = login;
+        this.userPassword = userPassword;
         this.posts = posts;
         this.role = role;
     }
@@ -30,13 +50,13 @@ open class User(): Serializable {
         get
         set
 
-    var username:String = ""
+    var login:String = ""
         @NotNull
         @Column(unique = true)
         get
         set
 
-    var password:String = ""
+    var userPassword:String = ""
         @NotNull
         get
         set
@@ -63,6 +83,6 @@ open class User(): Serializable {
         @OneToMany(cascade = arrayOf(CascadeType.ALL), orphanRemoval = true, mappedBy = "user")
 
     override fun toString(): String {
-        return "[id=$id, username=$username, password=$password]";
+        return "[id=$id, username=$login, password=$userPassword]";
     }
 }
