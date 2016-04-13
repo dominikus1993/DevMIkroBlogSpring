@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import org.hibernate.annotations.LazyCollection
 import org.hibernate.annotations.LazyCollectionOption
 import org.springframework.security.core.GrantedAuthority
+import org.springframework.security.core.authority.AuthorityUtils
 import org.springframework.security.core.userdetails.UserDetails
 import java.io.Serializable
 import javax.persistence.*
@@ -16,31 +17,38 @@ import javax.validation.constraints.NotNull
  */
 @Entity
 @Table(name = "Users")
-public class User(): UserDetails {
+public class User(): UserDetails, Serializable{
 
+    @Transient
     override fun getPassword(): String? = userPassword
 
+    @Transient
     override fun getUsername(): String? = login
 
-
+    @Transient
     override fun isCredentialsNonExpired(): Boolean = true
 
+    @Transient
     override fun isAccountNonExpired(): Boolean = true
 
+    @Transient
     override fun isAccountNonLocked(): Boolean = true
 
+    @Transient
     override fun getAuthorities(): MutableCollection<out GrantedAuthority>? {
-        throw UnsupportedOperationException()
+       return AuthorityUtils.createAuthorityList(role.role)
     }
 
+    @Transient
     override fun isEnabled(): Boolean = activated
 
-    constructor(id:Int, login:String, userPassword:String, posts:List<Post>, role: Role) : this(){
+    constructor(id:Int, login:String, userPassword:String, posts:List<Post>, role: Role, persistentTokens:List<Token>) : this(){
         this.id = id;
         this.login = login;
         this.userPassword = userPassword;
         this.posts = posts;
         this.role = role;
+        this.persistentTokens = persistentTokens;
     }
 
     var id:Int = 0
@@ -78,9 +86,11 @@ public class User(): UserDetails {
         get
         set
 
-    var persistentTokens:Set<Token> = setOf()
+    var persistentTokens:List<Token> = listOf()
         @JsonIgnore
-        @OneToMany(cascade = arrayOf(CascadeType.ALL), orphanRemoval = true, mappedBy = "user")
+        @OneToMany(cascade = arrayOf(CascadeType.ALL))
+        get
+        set
 
     override fun toString(): String {
         return "[id=$id, username=$login, password=$userPassword]";

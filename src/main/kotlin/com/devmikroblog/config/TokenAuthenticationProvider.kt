@@ -14,7 +14,7 @@ public class TokenAuthenticationProvider : AuthenticationProvider{
     private lateinit  var userRepository:IUserRepository
 
     override fun authenticate(auth: Authentication?): Authentication? {
-        
+        return null
     }
 
     override fun supports(p0: Class<*>?): Boolean {

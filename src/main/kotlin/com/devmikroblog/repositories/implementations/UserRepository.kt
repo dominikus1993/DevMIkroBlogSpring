@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository
  * Created by dominik on 12.04.16.
  */
 @Repository
-public class UserRepository : IUserRepository{
+open class UserRepository : IUserRepository{
     override fun read(): List<User>? {
         throw UnsupportedOperationException()
     }

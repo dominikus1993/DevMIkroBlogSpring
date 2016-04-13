@@ -3,17 +3,20 @@ package com.devmikroblog.model
 import com.fasterxml.jackson.annotation.JsonIgnore
 import java.io.Serializable
 import java.time.LocalDate
-import javax.persistence.Column
-import javax.persistence.Id
-import javax.persistence.ManyToOne
+import javax.persistence.*
 import javax.validation.constraints.NotNull
 
 /**
  * Created by dominik on 12.04.16.
  */
+@Entity
+@Table(name = "Tokens")
 public class Token : Serializable {
-    private var series: String = ""
+
+    var id:Int = 0
         @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        @Column
         get
         set
 
