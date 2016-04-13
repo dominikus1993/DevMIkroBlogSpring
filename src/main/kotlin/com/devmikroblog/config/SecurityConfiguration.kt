@@ -1,5 +1,6 @@
 package com.devmikroblog.config
 
+import com.devmikroblog.model.Role
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.security.SecurityProperties
 import org.springframework.context.annotation.Configuration
@@ -25,10 +26,7 @@ import javax.activation.DataSource
 open class SecurityConfiguration : WebSecurityConfigurerAdapter() {
 
     override fun configure(auth: AuthenticationManagerBuilder?) {
-//        auth?.jdbcAuthentication()?.dataSource(dataSource as javax.sql.DataSource)
-//                ?.usersByUsernameQuery("select username, password from Users where username=?")
-//                ?.authoritiesByUsernameQuery("select username role from Users where username=?")
-        super.configure(auth)
+        auth?.inMemoryAuthentication()?.withUser("user")?.password("passowrd")?.roles(Role.USER.role)
     }
 
 
@@ -55,6 +53,7 @@ open class SecurityConfiguration : WebSecurityConfigurerAdapter() {
                 ?.and()?.csrf()?.disable()?.authorizeRequests()
                 ?.antMatchers("/api/posts")?.permitAll()
     }
+
 
     private fun csrfTokenRepositoryGet():CsrfTokenRepository{
         val repository = HttpSessionCsrfTokenRepository()
