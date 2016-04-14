@@ -8,7 +8,7 @@ import java.util.function.Predicate
  */
 interface ICrudable<TEntity> {
     fun read():List<TEntity>?;
-    fun read(predicate: (TEntity) -> Boolean):Post?;
+    fun read(predicate: (TEntity) -> Boolean):TEntity?;
     fun create(post: TEntity?):Boolean;
     fun update(post: TEntity?):Boolean;
     fun delete(post: TEntity?):Boolean;

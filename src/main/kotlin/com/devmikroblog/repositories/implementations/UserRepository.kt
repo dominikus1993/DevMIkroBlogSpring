@@ -14,7 +14,7 @@ open class UserRepository : IUserRepository{
         throw UnsupportedOperationException()
     }
 
-    override fun read(predicate: (User) -> Boolean): Post? {
+    override fun read(predicate: (User) -> Boolean): User? {
         throw UnsupportedOperationException()
     }
 
