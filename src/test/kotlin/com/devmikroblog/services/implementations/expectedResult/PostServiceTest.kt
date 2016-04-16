@@ -3,7 +3,7 @@ package com.devmikroblog.services.implementations.expectedResult
 import com.devmikroblog.repositories.interfaces.IPostRepository
 import com.devmikroblog.services.implementations.PostService
 import com.devmikroblog.services.interfaces.IPostService
-import com.devmikroblog.utils.Mocks
+import com.devmikroblog.utils.PostServiceMocks
 import org.junit.Test
 import org.hamcrest.CoreMatchers.`is`;
 import org.hamcrest.CoreMatchers.not
@@ -17,7 +17,7 @@ import java.util.function.Predicate
  */
 class PostServiceTest {
 
-    private val postService: IPostService = PostService(Mocks.getIPostRepositoryMock());
+    private val postService: IPostService = PostService(PostServiceMocks.getIPostRepositoryMock());
 
     @Test
     fun testGetAll() {
@@ -29,7 +29,7 @@ class PostServiceTest {
 
     @Test
     fun testGetById() {
-        val testResult = postService.getBy (Predicate { x -> x.id == 1 })
+        val testResult = postService.getBy (PostServiceMocks.getIdPredicate())
         assertTrue(testResult.isSuccess)
         assertNotNull(testResult.value)
     }

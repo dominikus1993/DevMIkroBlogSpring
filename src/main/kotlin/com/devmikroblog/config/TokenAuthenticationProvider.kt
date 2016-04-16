@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.authentication.AuthenticationProvider
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.Authentication
+import java.util.function.Predicate
 
 /**
  * Created by dominik on 12.04.16.
@@ -20,7 +21,7 @@ public class TokenAuthenticationProvider : AuthenticationProvider{
         val userName = userNamePasswordAuthToken.principal.toString()
         val password = userNamePasswordAuthToken.credentials.toString()
 
-        val user = userRepository.read{x -> x.login == userName && x.password == password}
+        val user = userRepository.read(Predicate{x -> x.login == userName && x.password == password})
 
         return UsernamePasswordAuthenticationToken(user, null, user?.authorities)
     }
