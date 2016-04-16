@@ -34,6 +34,10 @@ public class PostServiceTestBdd{
 
     @Test
     fun testGetByAuthorLogin() {
+        val mockedPostRepository = PostServiceMocks.getIPostRepositoryMock()
+        val postService = PostService(mockedPostRepository);
+        val testResult = postService.getBy(PostServiceMocks.predicateByAuthorLogin)
+        verify(mockedPostRepository, times(1)).read(PostServiceMocks.predicateByAuthorLogin)
     }
 
     @Test
