@@ -22,7 +22,9 @@ class PostService : IPostService {
     }
 
     override fun getPostsBy(predicate: Predicate<Post>): Result<List<Post>?> {
-        throw UnsupportedOperationException()
+        val queryResult = postRepository.read()
+        val filterResult = queryResult?.filter { x -> predicate.test(x) }
+        return Result.ErrorWhenNoData(filterResult, listOf("No data"))
     }
 
     override fun getAll(): Result<List<Post>?> {
