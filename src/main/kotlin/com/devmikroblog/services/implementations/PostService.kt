@@ -6,6 +6,7 @@ import com.devmikroblog.repositories.interfaces.IPostRepository
 import com.devmikroblog.services.interfaces.IPostService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import java.util.function.Function
 import java.util.function.Predicate
 
 /**
@@ -38,18 +39,22 @@ class PostService : IPostService {
     }
 
     override fun update(post: Post, userId: Int): Result<Boolean> {
+        return action(post, userId, Function { x -> postRepository.update(x) })
+    }
+
+    override fun delete(post: Post, userId: Int): Result<Boolean> {
+        return action(post, userId, Function { x -> postRepository.delete(x) })
+    }
+
+    private fun action(post: Post, userId: Int, function: Function<Post, Boolean>): Result<Boolean> {
         val postsInDb = getAll()
 
         val existPost = Result.ErrorWhenNoData(postsInDb.value?.filter { x -> x.id == post.id && x.author.id == userId }?.singleOrNull())
 
         if(existPost.isSuccess){
-            val queryResult = postRepository.update(post)
+            val queryResult = function.apply(post)
             return Result(queryResult, listOf("Update error"))
         }
         return Result(false)
-    }
-
-    override fun delete(post: Post, userId: Int): Result<Boolean> {
-        throw UnsupportedOperationException()
     }
 }

@@ -56,4 +56,15 @@ public class PostServiceTestBdd{
         verify(mockedPostRepository, times(1)).update(any(Post::class.java))
         verify(mockedPostRepository, times(1)).read()
     }
+
+    @Test
+    fun testDelete() {
+        val testPost = Post()
+        testPost.id = 1
+        val mockedPostRepository = PostServiceMocks.getIPostRepositoryMock()
+        val postService = PostService(mockedPostRepository);
+        val testResult = postService.delete(PostServiceMocks.testPost, 1)
+        verify(mockedPostRepository, times(1)).delete(any(Post::class.java))
+        verify(mockedPostRepository, times(1)).read()
+    }
 }
