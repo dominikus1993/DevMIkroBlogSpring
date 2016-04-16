@@ -1,5 +1,6 @@
 package com.devmikroblog.services.implementations.expectedResult
 
+import com.devmikroblog.model.Post
 import com.devmikroblog.services.implementations.PostService
 import com.devmikroblog.services.interfaces.IPostService
 import com.devmikroblog.utils.PostServiceMocks
@@ -39,7 +40,9 @@ class PostServiceTest {
 
     @Test
     fun testCreate() {
-
+        val testResult = postService.create(Post())
+        assertTrue(testResult.isSuccess)
+        assertTrue(testResult.value)
     }
 
     @Test

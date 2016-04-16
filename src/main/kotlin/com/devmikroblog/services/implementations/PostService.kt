@@ -33,11 +33,11 @@ class PostService : IPostService {
         return Result.ErrorWhenNoData(postRepository.read(predicate))
     }
 
-    override fun create(post: Post): Result<Post?> {
+    override fun create(post: Post): Result<Boolean> {
         throw UnsupportedOperationException()
     }
 
-    override fun update(post: Post, userId: Int): Boolean {
+    override fun update(post: Post, userId: Int): Result<Boolean> {
         throw UnsupportedOperationException()
     }
 
