@@ -10,6 +10,7 @@ import org.hamcrest.CoreMatchers.not
 import org.junit.Assert.*
 import org.junit.*
 import org.junit.Before
+import java.util.function.Predicate
 
 /**
  * Created by dominik on 22.03.16.
@@ -28,7 +29,7 @@ class PostServiceTest {
 
     @Test
     fun testGetById() {
-        val testResult = postService.getBy { x -> x.id == 1}
+        val testResult = postService.getBy (Predicate { x -> x.id == 1 })
         assertTrue(testResult.isSuccess)
         assertNotNull(testResult.value)
     }

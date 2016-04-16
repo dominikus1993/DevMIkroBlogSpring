@@ -6,6 +6,7 @@ import com.devmikroblog.repositories.interfaces.IPostRepository
 import com.devmikroblog.services.interfaces.IPostService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import java.util.function.Predicate
 
 /**
  * Created by dominik on 22.03.16.
@@ -20,7 +21,7 @@ class PostService : IPostService {
         this.postRepository = postRepository
     }
 
-    override fun getPostsBy(predicate: (Post) -> Boolean): Result<List<Post>?> {
+    override fun getPostsBy(predicate: Predicate<Post>): Result<List<Post>?> {
         throw UnsupportedOperationException()
     }
 
@@ -28,7 +29,7 @@ class PostService : IPostService {
         return Result.ErrorWhenNoData(postRepository.read())
     }
 
-    override fun getBy(predicate: (Post) -> Boolean): Result<Post?> {
+    override fun getBy(predicate: Predicate<Post>): Result<Post?> {
         return Result.ErrorWhenNoData(postRepository.read(predicate))
     }
 

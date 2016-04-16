@@ -8,6 +8,7 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
+import java.util.function.Predicate
 
 /**
  * Created by dominik on 22.03.16.
@@ -31,6 +32,6 @@ class PostController : BaseController{
 
     @RequestMapping("/get/{id}")
     fun getById(@PathVariable id:Int):Result<Post?>{
-        return service.getBy { it -> it.id == id };
+        return service.getBy(Predicate { x -> x.id == id });
     }
 }

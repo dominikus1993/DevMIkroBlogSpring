@@ -4,14 +4,15 @@ import com.devmikroblog.model.Post
 import com.devmikroblog.model.Result
 import org.hibernate.sql.Update
 import org.springframework.stereotype.Service
+import java.util.function.Predicate
 
 /**
  * Created by dominik on 22.03.16.
  */
 interface IPostService {
     fun getAll(): Result<List<Post>?>
-    fun getBy(predicate: (Post) -> Boolean):Result<Post?>
-    fun getPostsBy(predicate: (Post) -> Boolean): Result<List<Post>?>
+    fun getBy(predicate: Predicate<Post>):Result<Post?>
+    fun getPostsBy(predicate: Predicate<Post>): Result<List<Post>?>
     fun create(post: Post):Result<Post?>
     fun update(post: Post, userId: Int): Boolean
 }
