@@ -45,6 +45,12 @@ public class PostServiceTestBdd{
 
     @Test
     fun testUpdate() {
-
+        val testPost = Post()
+        testPost.id = 1
+        val mockedPostRepository = PostServiceMocks.getIPostRepositoryMock()
+        val postService = PostService(mockedPostRepository);
+        val testResult = postService.update(PostServiceMocks.testPost, 1)
+        verify(mockedPostRepository, times(1)).update(any(Post::class.java))
+        verify(mockedPostRepository, times(1)).read(any())
     }
 }

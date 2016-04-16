@@ -11,9 +11,9 @@ import java.util.function.Predicate
  * Created by dominik on 22.03.16.
  */
 object PostServiceMocks {
-    public  val predicateById = Predicate<Post> { x -> x.id == 1 }
+    public val predicateById = Predicate<Post> { x -> x.id == 1 }
     public val predicateByAuthorLogin = Predicate<Post> { x -> x.author.login == "dominikus1993" }
-
+    public val testPost = Post(1, "Test", 1, User(), listOf(), listOf())
 
     fun getIPostRepositoryMock(): IPostRepository{
         val mockRes = mock(IPostRepository::class.java);
@@ -21,6 +21,8 @@ object PostServiceMocks {
         `when`(mockRes.read(predicateById)).thenReturn(Post(1,"Test", 0, User(), listOf(), listOf()))
         `when`(mockRes.read(predicateByAuthorLogin)).thenReturn(Post(1,"Test", 0, User(), listOf(), listOf()))
         `when`(mockRes.create(any(Post::class.java))).thenReturn(true)
+        `when`(mockRes.update(any(Post::class.java))).thenReturn(false)
+        `when`(mockRes.update(testPost)).thenReturn(true)
         return mockRes;
     }
 }

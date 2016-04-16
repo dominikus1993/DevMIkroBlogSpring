@@ -44,9 +44,4 @@ class PostServiceTest {
         assertTrue(testResult.isSuccess)
         assertTrue(testResult.value)
     }
-
-    @Test
-    fun testUpdate() {
-
-    }
 }

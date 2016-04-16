@@ -38,7 +38,13 @@ class PostService : IPostService {
     }
 
     override fun update(post: Post, userId: Int): Result<Boolean> {
-        throw UnsupportedOperationException()
+        val postInDb = getBy(Predicate { x -> x.id == 1 && x.author.id == userId })
+
+        if(postInDb.isSuccess){
+            val queryResult = postRepository.update(post)
+            return Result(queryResult, listOf("Update error"))
+        }
+        return Result.ErrorWhenNoData()
     }
 
     override fun delete(post: Post, userId: Int): Result<Boolean> {
