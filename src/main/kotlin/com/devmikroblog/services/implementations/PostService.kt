@@ -44,7 +44,7 @@ class PostService : IPostService {
             val queryResult = postRepository.update(post)
             return Result(queryResult, listOf("Update error"))
         }
-        return Result.ErrorWhenNoData()
+        return Result(false)
     }
 
     override fun delete(post: Post, userId: Int): Result<Boolean> {

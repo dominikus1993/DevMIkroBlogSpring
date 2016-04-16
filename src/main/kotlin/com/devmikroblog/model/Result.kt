@@ -11,9 +11,5 @@ class Result<T> constructor(val value:T, val messages:List<String> = listOf()){
         fun <T>ErrorWhenNoData(value:T, messages: List<String> = listOf()):Result<T>{
             return Result(value, messages)
         }
-
-        fun <T> Error(messages: List<String> = listOf()) : Result<T?>{
-            return Result(null, messages)
-        }
     }
 }
