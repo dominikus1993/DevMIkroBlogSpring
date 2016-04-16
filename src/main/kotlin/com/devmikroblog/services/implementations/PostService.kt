@@ -38,9 +38,11 @@ class PostService : IPostService {
     }
 
     override fun update(post: Post, userId: Int): Result<Boolean> {
-        val postInDb = getBy(Predicate { x -> x.id == 1 && x.author.id == userId })
+        val postsInDb = getAll()
 
-        if(postInDb.isSuccess){
+        val existPost = Result.ErrorWhenNoData(postsInDb.value?.filter { x -> x.id == post.id && x.author.id == userId }?.singleOrNull())
+
+        if(existPost.isSuccess){
             val queryResult = postRepository.update(post)
             return Result(queryResult, listOf("Update error"))
         }

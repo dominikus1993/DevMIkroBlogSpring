@@ -17,7 +17,7 @@ object PostServiceMocks {
 
     fun getIPostRepositoryMock(): IPostRepository{
         val mockRes = mock(IPostRepository::class.java);
-        `when`(mockRes.read()).thenReturn(arrayListOf(Post(1, "Test", 0, User(), listOf(), listOf())))
+        `when`(mockRes.read()).thenReturn(arrayListOf(Post(1, "Test", 0, User(1, "a", "a", listOf(), Role.ADMIN, arrayListOf()), listOf(), listOf())))
         `when`(mockRes.read(predicateById)).thenReturn(Post(1,"Test", 0, User(), listOf(), listOf()))
         `when`(mockRes.read(predicateByAuthorLogin)).thenReturn(Post(1,"Test", 0, User(), listOf(), listOf()))
         `when`(mockRes.create(any(Post::class.java))).thenReturn(true)
