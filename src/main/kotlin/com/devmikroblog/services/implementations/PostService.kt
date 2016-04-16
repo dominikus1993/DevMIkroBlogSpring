@@ -34,7 +34,8 @@ class PostService : IPostService {
     }
 
     override fun create(post: Post): Result<Boolean> {
-        throw UnsupportedOperationException()
+        val queryResult = postRepository.create(post)
+        return Result.ErrorWhenNoData(queryResult, listOf("Bad data"))
     }
 
     override fun update(post: Post, userId: Int): Result<Boolean> {
