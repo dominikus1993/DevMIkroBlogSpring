@@ -10,12 +10,16 @@ import org.junit.Test
 /**
  * Created by dominik on 16.04.16.
  */
+import org.mockito.Mockito.*;
+
 public class PostServiceTestBdd{
-    private val postService: IPostService = PostService(PostServiceMocks.getIPostRepositoryMock());
 
     @Test
     fun testGetAll() {
-
+        val mockedPostRepository = PostServiceMocks.getIPostRepositoryMock()
+        val postService = PostService(mockedPostRepository);
+        val testResult = postService.getAll()
+        verify(mockedPostRepository, times(1)).read()
     }
 
     @Test
