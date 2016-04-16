@@ -6,8 +6,10 @@ package com.devmikroblog.services.implementations.behaviour
 import com.devmikroblog.model.Post
 import com.devmikroblog.services.implementations.PostService
 import com.devmikroblog.utils.PostServiceMocks
+import info.solidsoft.mockito.java8.LambdaMatcher
 import org.junit.Test
 import org.mockito.Mockito.*
+import java.util.function.Predicate
 
 public class PostServiceTestBdd{
 
@@ -51,6 +53,6 @@ public class PostServiceTestBdd{
         val postService = PostService(mockedPostRepository);
         val testResult = postService.update(PostServiceMocks.testPost, 1)
         verify(mockedPostRepository, times(1)).update(any(Post::class.java))
-        verify(mockedPostRepository, times(1)).read(any())
+        //verify(mockedPostRepository, times(1)).read(argThat(LambdaMatcher(Predicate<Post>({ x -> x.id == 1 })))
     }
 }
