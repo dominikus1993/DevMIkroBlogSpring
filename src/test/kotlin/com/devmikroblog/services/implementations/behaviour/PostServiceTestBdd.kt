@@ -3,11 +3,11 @@ package com.devmikroblog.services.implementations.behaviour
 /**
  * Created by dominik on 16.04.16.
  */
+import com.devmikroblog.model.Post
 import com.devmikroblog.services.implementations.PostService
 import com.devmikroblog.utils.PostServiceMocks
 import org.junit.Test
-import org.mockito.Mockito.times
-import org.mockito.Mockito.verify
+import org.mockito.Mockito.*
 
 public class PostServiceTestBdd{
 
@@ -37,7 +37,10 @@ public class PostServiceTestBdd{
 
     @Test
     fun testCreate() {
-
+        val mockedPostRepository = PostServiceMocks.getIPostRepositoryMock()
+        val postService = PostService(mockedPostRepository);
+        val testResult = postService.create(Post())
+        verify(mockedPostRepository, times(1)).create(any(Post::class.java))
     }
 
     @Test

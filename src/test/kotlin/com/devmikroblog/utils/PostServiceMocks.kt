@@ -20,6 +20,7 @@ object PostServiceMocks {
         `when`(mockRes.read()).thenReturn(arrayListOf(Post(1, "Test", 0, User(), listOf(), listOf())))
         `when`(mockRes.read(predicateById)).thenReturn(Post(1,"Test", 0, User(), listOf(), listOf()))
         `when`(mockRes.read(predicateByAuthorLogin)).thenReturn(Post(1,"Test", 0, User(), listOf(), listOf()))
+        `when`(mockRes.create(any(Post::class.java))).thenReturn(true)
         return mockRes;
     }
 }
