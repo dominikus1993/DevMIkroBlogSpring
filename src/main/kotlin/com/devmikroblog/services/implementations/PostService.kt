@@ -13,7 +13,6 @@ import java.util.function.Predicate
  */
 @Service
 class PostService : IPostService {
-
     private val postRepository:IPostRepository;
 
     @Autowired
@@ -42,4 +41,7 @@ class PostService : IPostService {
         throw UnsupportedOperationException()
     }
 
+    override fun delete(post: Post, userId: Int): Result<Boolean> {
+        throw UnsupportedOperationException()
+    }
 }
