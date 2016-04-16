@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service
 interface IPostService {
     fun getAll(): Result<List<Post>?>
     fun getBy(predicate: (Post) -> Boolean):Result<Post?>
+    fun getPostsBy(predicate: (Post) -> Boolean): Result<List<Post>?>
     fun create(post: Post):Result<Post?>
     fun update(post: Post, userId: Int): Boolean
 }

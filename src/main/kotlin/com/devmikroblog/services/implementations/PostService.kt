@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service
  */
 @Service
 class PostService : IPostService {
+
     private val postRepository:IPostRepository;
 
     @Autowired
@@ -19,6 +20,9 @@ class PostService : IPostService {
         this.postRepository = postRepository
     }
 
+    override fun getPostsBy(predicate: (Post) -> Boolean): Result<List<Post>?> {
+        throw UnsupportedOperationException()
+    }
 
     override fun getAll(): Result<List<Post>?> {
         return Result.ErrorWhenNoData(postRepository.read())

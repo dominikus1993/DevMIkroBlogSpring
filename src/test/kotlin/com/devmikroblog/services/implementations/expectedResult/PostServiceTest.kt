@@ -1,6 +1,7 @@
-package com.devmikroblog.services.implementations
+package com.devmikroblog.services.implementations.expectedResult
 
 import com.devmikroblog.repositories.interfaces.IPostRepository
+import com.devmikroblog.services.implementations.PostService
 import com.devmikroblog.services.interfaces.IPostService
 import com.devmikroblog.utils.Mocks
 import org.junit.Test
@@ -15,7 +16,7 @@ import org.junit.Before
  */
 class PostServiceTest {
 
-    private val postService:IPostService = PostService(Mocks.getIPostRepositoryMock());
+    private val postService: IPostService = PostService(Mocks.getIPostRepositoryMock());
 
     @Test
     fun testGetAll() {
@@ -26,7 +27,13 @@ class PostServiceTest {
     }
 
     @Test
-    fun testGetBy() {
+    fun testGetById() {
+        val testResult = postService.getBy { x -> x.author.login == "dominikus1993" }
+        assertTrue(testResult.isSuccess)
+    }
+
+    @Test
+    fun testGetByAuthorLogin() {
 
     }
 
