@@ -1,16 +1,12 @@
 package com.devmikroblog.services.implementations.expectedResult
 
-import com.devmikroblog.repositories.interfaces.IPostRepository
 import com.devmikroblog.services.implementations.PostService
 import com.devmikroblog.services.interfaces.IPostService
 import com.devmikroblog.utils.PostServiceMocks
-import org.junit.Test
-import org.hamcrest.CoreMatchers.`is`;
+import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.not
 import org.junit.Assert.*
-import org.junit.*
-import org.junit.Before
-import java.util.function.Predicate
+import org.junit.Test
 
 /**
  * Created by dominik on 22.03.16.
