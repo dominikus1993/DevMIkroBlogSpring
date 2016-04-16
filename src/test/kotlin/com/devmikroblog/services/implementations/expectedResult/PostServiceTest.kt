@@ -44,4 +44,11 @@ class PostServiceTest {
         assertTrue(testResult.isSuccess)
         assertTrue(testResult.value)
     }
+
+    @Test
+    fun testGetPostsByAuthor() {
+        val testResult = postService.getPostsBy (PostServiceMocks.predicateByAuthorLogin)
+        assertTrue(testResult.isSuccess)
+        assertNotNull(testResult.value)
+    }
 }

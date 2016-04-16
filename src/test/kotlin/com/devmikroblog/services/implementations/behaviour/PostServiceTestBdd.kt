@@ -6,10 +6,7 @@ package com.devmikroblog.services.implementations.behaviour
 import com.devmikroblog.model.Post
 import com.devmikroblog.services.implementations.PostService
 import com.devmikroblog.utils.PostServiceMocks
-import info.solidsoft.mockito.java8.*
-import org.hamcrest.BaseMatcher
 import org.junit.Test
-import org.mockito.ArgumentMatcher
 import org.mockito.Mockito.*
 
 public class PostServiceTestBdd{
@@ -65,6 +62,14 @@ public class PostServiceTestBdd{
         val postService = PostService(mockedPostRepository);
         val testResult = postService.delete(PostServiceMocks.testPost, 1)
         verify(mockedPostRepository, times(1)).delete(any(Post::class.java))
+        verify(mockedPostRepository, times(1)).read()
+    }
+
+    @Test
+    fun testGetPostsByPredicate(){
+        val mockedPostRepository = PostServiceMocks.getIPostRepositoryMock()
+        val postService = PostService(mockedPostRepository);
+        val testResult = postService.getPostsBy(PostServiceMocks.predicateById)
         verify(mockedPostRepository, times(1)).read()
     }
 }
