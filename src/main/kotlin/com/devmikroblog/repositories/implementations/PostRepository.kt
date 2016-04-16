@@ -10,6 +10,7 @@ import com.devmikroblog.sessionStrategy
 import org.hibernate.SessionFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Repository
+import java.util.function.Predicate
 
 /**
  * Created by dominik on 22.03.16.
@@ -26,9 +27,9 @@ open class PostRepository : BaseRepository<Post>, IPostRepository {
         return (getCurrentSession().createCriteria(Post::class.java).list() as List<Post>)
     }
 
-    override fun read(predicate: (Post) -> Boolean): Post? {
+    override fun read(predicate: Predicate<Post>): Post? {
         val posts = read()
-        return posts?.find { it -> predicate(it) }
+        return posts?.find { it -> predicate.test(it) }
     }
 
     override fun create(post: Post?): Boolean {

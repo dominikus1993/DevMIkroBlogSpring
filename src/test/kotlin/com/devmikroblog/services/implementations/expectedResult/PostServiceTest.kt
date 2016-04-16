@@ -28,8 +28,9 @@ class PostServiceTest {
 
     @Test
     fun testGetById() {
-        val testResult = postService.getBy { x -> x.author.login == "dominikus1993" }
+        val testResult = postService.getBy { x -> x.id == 1}
         assertTrue(testResult.isSuccess)
+        assertNotNull(testResult.value)
     }
 
     @Test

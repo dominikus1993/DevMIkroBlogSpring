@@ -13,8 +13,7 @@ object Mocks {
     fun getIPostRepositoryMock(): IPostRepository{
         val mockRes = mock(IPostRepository::class.java);
         `when`(mockRes.read()).thenReturn(arrayListOf(Post(1, "Test", 0, User(), listOf(), listOf())))
-        `when`(mockRes.read{it -> it.id == 1}).thenReturn(Post(1,"Test", 0, User(), listOf(), listOf()))
-        `when`(mockRes.read{it -> it.author.login == "dominikus1993"}).thenReturn(Post(1,"Test", 0, User(), listOf(), listOf()))
+        `when`(mockRes.read(any())).thenReturn(Post(1,"Test", 0, User(), listOf(), listOf()))
         return mockRes;
     }
 }
