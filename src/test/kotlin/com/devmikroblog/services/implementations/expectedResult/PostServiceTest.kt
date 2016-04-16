@@ -29,14 +29,16 @@ class PostServiceTest {
 
     @Test
     fun testGetById() {
-        val testResult = postService.getBy (PostServiceMocks.getIdPredicate())
+        val testResult = postService.getBy (PostServiceMocks.predicateById)
         assertTrue(testResult.isSuccess)
         assertNotNull(testResult.value)
     }
 
     @Test
     fun testGetByAuthorLogin() {
-
+        val testResult = postService.getBy (PostServiceMocks.predicateByAuthorLogin)
+        assertTrue(testResult.isSuccess)
+        assertNotNull(testResult.value)
     }
 
     @Test
