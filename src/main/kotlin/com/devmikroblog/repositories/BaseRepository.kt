@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired
 /**
  * Created by dominik on 22.03.16.
  */
-open abstract class BaseRepository<TEntity>: IRepository<TEntity>{
+open abstract class BaseRepository{
     private val sessionFactory:SessionFactory;
 
     @Autowired

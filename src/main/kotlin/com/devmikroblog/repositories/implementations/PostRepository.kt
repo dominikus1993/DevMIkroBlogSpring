@@ -16,7 +16,7 @@ import java.util.function.Predicate
  * Created by dominik on 22.03.16.
  */
 @Repository
-open class PostRepository : BaseRepository<Post>, IPostRepository {
+open class PostRepository : BaseRepository, IPostRepository {
 
     @Autowired
     constructor(sessionFactory: SessionFactory) : super(sessionFactory){
