@@ -18,7 +18,13 @@ class CommentsRepository : BaseRepository ,ICommentsRepository {
     }
 
     override fun read(postId: Int): List<Post>? {
-        throw UnsupportedOperationException()
+        val hql = "SELECT p.*" +
+                  "FROM posts p" +
+                  "inner join posts_comments on (p.id = posts_comments.comments_id)"+
+                  "where post_id = :id"
+        val query = getCurrentSession().createQuery(hql)
+        query.setInteger("id", postId)
+        return query.list() as List<Post>
     }
 
     override fun create(comment: Post?, parent: Post?): Boolean {
