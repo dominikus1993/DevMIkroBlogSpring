@@ -17,11 +17,7 @@ class CommentsRepository : BaseRepository ,ICommentsRepository {
 
     }
 
-    override fun read(): List<Post>? {
-        throw UnsupportedOperationException()
-    }
-
-    override fun read(predicate: Predicate<Post>): Post? {
+    override fun read(postId: Int): List<Post>? {
         throw UnsupportedOperationException()
     }
 
@@ -36,5 +32,4 @@ class CommentsRepository : BaseRepository ,ICommentsRepository {
     override fun delete(comment: Post?): Boolean {
         throw UnsupportedOperationException()
     }
-
 }
