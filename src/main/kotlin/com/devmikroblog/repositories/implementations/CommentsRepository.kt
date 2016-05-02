@@ -4,6 +4,7 @@ import com.devmikroblog.model.Post
 import com.devmikroblog.repositories.BaseRepository
 import com.devmikroblog.repositories.interfaces.ICommentsRepository
 import org.hibernate.SessionFactory
+import org.hibernate.Transaction
 import org.springframework.beans.factory.annotation.Autowired
 import java.util.function.Predicate
 
@@ -28,7 +29,23 @@ class CommentsRepository : BaseRepository ,ICommentsRepository {
     }
 
     override fun create(comment: Post?, parent: Post?): Boolean {
-        throw UnsupportedOperationException()
+        val session = getCurrentSession()
+
+        try{
+            session.beginTransaction()
+            val parentPost = (session.get(Post::class.java, parent?.id) as Post)
+            val commentId = session.save(comment) as Int
+            parentPost.comments.toMutableList().add(comment as Post)
+            session.saveOrUpdate(parentPost)
+            session.transaction.commit()
+            return true
+        }catch(ex:Exception){
+            session.transaction.rollback()
+            return false
+        }finally{
+            session.close()
+        }
+
     }
 
     override fun update(comments: Post?): Boolean {

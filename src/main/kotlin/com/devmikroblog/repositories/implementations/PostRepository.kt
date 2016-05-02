@@ -42,28 +42,33 @@ open class PostRepository : BaseRepository, IPostRepository {
     }
 
     override fun update(post: Post?): Boolean {
+        val session = getCurrentSession()
         try{
-            val session = getCurrentSession()
             session.beginTransaction();
             session.update(post);
             session.transaction.commit();
             session.close();
             return true
         }catch(ex:Exception){
+            session.transaction.rollback()
             return false
+        }finally{
+            session.close()
         }
 
 
     }
 
     override fun delete(post: Post?): Boolean {
+        val session = getCurrentSession()
         try{
-            val session = getCurrentSession()
-            val post = session.get(Post::class.java, post?.id)
-            session.delete(post)
+            val postToDelete = session.get(Post::class.java, post?.id)
+            session.delete(postToDelete)
             return true
         } catch(ex:Exception){
             return false
+        }finally{
+            session.close()
         }
     }
 
