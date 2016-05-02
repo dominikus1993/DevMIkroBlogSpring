@@ -9,6 +9,6 @@ import java.util.function.Predicate
 interface ICommentsRepository {
     fun read(postId : Int):List<Post>?;
     fun create(comment: Post?, parent:Post?):Boolean;
-    fun update(comments: Post?):Boolean;
+    fun update(comment: Post?):Boolean;
     fun delete(comment: Post?):Boolean;
 }
