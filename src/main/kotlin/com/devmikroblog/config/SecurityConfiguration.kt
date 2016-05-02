@@ -1,6 +1,7 @@
 package com.devmikroblog.config
 
 import com.devmikroblog.model.Role
+import org.hibernate.mapping.Set
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.security.SecurityProperties
 import org.springframework.context.annotation.Configuration
@@ -15,6 +16,7 @@ import org.springframework.security.web.csrf.CsrfFilter
 import org.springframework.security.web.csrf.CsrfTokenRepository
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher
+import java.util.*
 import javax.activation.DataSource
 
 /**
@@ -22,11 +24,11 @@ import javax.activation.DataSource
  */
 @Configuration
 @EnableWebSecurity
-@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 open class SecurityConfiguration : WebSecurityConfigurerAdapter() {
 
     override fun configure(auth: AuthenticationManagerBuilder?) {
-        auth?.inMemoryAuthentication()?.withUser("user")?.password("passowrd")?.roles(Role.USER.role)
+        super.configure(auth)
+        //auth?.inMemoryAuthentication()?.withUser("user")?.password("passowrd")?.roles(Role.USER.role)
     }
 
 
@@ -42,16 +44,17 @@ open class SecurityConfiguration : WebSecurityConfigurerAdapter() {
     }
 
     override fun configure(http: HttpSecurity?) {
-        http?.httpBasic()?.and()?.authorizeRequests()
-                ?.antMatchers("/index", "/home", "/")?.permitAll()
-                ?.anyRequest()?.authenticated()?.and()?.formLogin()?.loginProcessingUrl("/api/authentication")
-                ?.usernameParameter("username")
-                ?.passwordParameter("password")
-                ?.permitAll()
-                ?.permitAll()?.and()?.logout()?.logoutUrl("/api/logout")?.deleteCookies("JSESSIONID", "CSRF-TOKEN")
-                ?.permitAll()
-                ?.and()?.csrf()?.disable()?.authorizeRequests()
-                ?.antMatchers("/api/posts")?.permitAll()
+//        http?.httpBasic()?.and()?.authorizeRequests()
+//                ?.antMatchers("/index", "/home", "/")?.permitAll()
+//                ?.anyRequest()?.authenticated()?.and()?.formLogin()?.loginProcessingUrl("/api/authentication")
+//                ?.usernameParameter("username")
+//                ?.passwordParameter("password")
+//                ?.permitAll()
+//                ?.permitAll()?.and()?.logout()?.logoutUrl("/api/logout")?.deleteCookies("JSESSIONID", "CSRF-TOKEN")
+//                ?.permitAll()
+//                ?.and()?.csrf()?.disable()?.authorizeRequests()
+//                ?.antMatchers("/api/post")?.permitAll()
+        http?.antMatcher("/**")?.anonymous()
     }
 
 

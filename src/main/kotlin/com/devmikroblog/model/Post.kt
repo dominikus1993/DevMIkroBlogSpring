@@ -1,5 +1,7 @@
 package com.devmikroblog.model
 
+import org.hibernate.annotations.LazyCollection
+import org.hibernate.annotations.LazyCollectionOption
 import java.io.Serializable
 import javax.persistence.*
 import javax.validation.constraints.NotNull
@@ -11,7 +13,7 @@ import javax.validation.constraints.NotNull
 @Table(name = "Posts")
 class Post():Serializable{
 
-    constructor(id:Int, message:String, rate: Int, author:User, comments:List<Post>, tags:List<Tag>) : this(){
+    constructor(id:Int, message:String, rate: Int, author:User, comments:Set<Post>, tags:Set<Tag>) : this(){
         this.id = id;
         this.message = message;
         this.rate = rate;
@@ -43,24 +45,27 @@ class Post():Serializable{
         get
         set
 
-    var comments:List<Post> = listOf()
+    var comments:Set<Post> = setOf()
         @ManyToMany(cascade = arrayOf(CascadeType.ALL), fetch = FetchType.EAGER)
         @JoinTable(name = "PostsComments",
             joinColumns = arrayOf(JoinColumn(name = "PostId")),
             inverseJoinColumns = arrayOf(JoinColumn(name = "CommentsId")))
+        @LazyCollection(LazyCollectionOption.FALSE)
         get
         set
 
-    var tags:List<Tag> = listOf()
+    var tags:Set<Tag> = setOf()
         @ManyToMany(fetch = FetchType.EAGER)
         @JoinTable(name = "PostsTags",
             joinColumns = arrayOf(JoinColumn(name = "PostId")),
             inverseJoinColumns = arrayOf(JoinColumn(name = "TagId")))
+        @LazyCollection(LazyCollectionOption.FALSE)
         get
         set
 
-    var votes:List<Vote> = listOf()
+    var votes:Set<Vote> = setOf()
         @OneToMany(mappedBy = "post")
+        @LazyCollection(LazyCollectionOption.FALSE)
         get
         set
 

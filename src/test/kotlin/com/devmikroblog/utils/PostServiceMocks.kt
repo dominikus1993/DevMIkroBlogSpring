@@ -13,13 +13,13 @@ import java.util.function.Predicate
 object PostServiceMocks {
     public val predicateById = Predicate<Post> { x -> x.id == 1 }
     public val predicateByAuthorLogin = Predicate<Post> { x -> x.author.login == "dominikus1993" }
-    public val testPost = Post(1, "Test", 1, User(), listOf(), listOf())
+    public val testPost = Post(1, "Test", 1, User(), setOf(), setOf())
 
     fun getIPostRepositoryMock(): IPostRepository{
         val mockRes = mock(IPostRepository::class.java);
-        `when`(mockRes.read()).thenReturn(arrayListOf(Post(1, "Test", 0, User(1, "a", "a", listOf(), Role.ADMIN, arrayListOf()), listOf(), listOf())))
-        `when`(mockRes.read(predicateById)).thenReturn(Post(1,"Test", 0, User(), listOf(), listOf()))
-        `when`(mockRes.read(predicateByAuthorLogin)).thenReturn(Post(1,"Test", 0, User(), listOf(), listOf()))
+        `when`(mockRes.read()).thenReturn(arrayListOf(Post(1, "Test", 0, User(1, "a", "a", setOf(), Role.ADMIN, setOf()), setOf(), setOf())))
+        `when`(mockRes.read(predicateById)).thenReturn(Post(1,"Test", 0, User(), setOf(), setOf()))
+        `when`(mockRes.read(predicateByAuthorLogin)).thenReturn(Post(1,"Test", 0, User(), setOf(), setOf()))
         `when`(mockRes.create(any(Post::class.java))).thenReturn(true)
         `when`(mockRes.update(any(Post::class.java))).thenReturn(false)
         `when`(mockRes.update(testPost)).thenReturn(true)

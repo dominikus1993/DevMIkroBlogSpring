@@ -42,7 +42,7 @@ public class User(): UserDetails, Serializable{
     @Transient
     override fun isEnabled(): Boolean = activated
 
-    constructor(id:Int, login:String, userPassword:String, posts:List<Post>, role: Role, persistentTokens:List<Token>) : this(){
+    constructor(id:Int, login:String, userPassword:String, posts:Set<Post>, role: Role, persistentTokens:Set<Token>) : this(){
         this.id = id;
         this.login = login;
         this.userPassword = userPassword;
@@ -75,7 +75,7 @@ public class User(): UserDetails, Serializable{
         get
         set
 
-    var posts:List<Post> = listOf()
+    var posts:Set<Post> = setOf()
         @OneToMany(cascade = arrayOf(CascadeType.ALL))
         @LazyCollection(LazyCollectionOption.FALSE)
         get
@@ -86,7 +86,7 @@ public class User(): UserDetails, Serializable{
         get
         set
 
-    var persistentTokens:List<Token> = listOf()
+    var persistentTokens:Set<Token> = setOf()
         @JsonIgnore
         @OneToMany(cascade = arrayOf(CascadeType.ALL))
         get

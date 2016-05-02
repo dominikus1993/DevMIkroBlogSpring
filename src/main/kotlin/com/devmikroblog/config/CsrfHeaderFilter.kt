@@ -13,8 +13,6 @@ import javax.servlet.http.HttpServletResponse
 /**
  * Created by dominik on 27.03.16.
  */
-@Component
-@Order(org.springframework.core.Ordered.HIGHEST_PRECEDENCE)
 class CsrfHeaderFilter : OncePerRequestFilter() {
     override fun doFilterInternal(req: HttpServletRequest?, res: HttpServletResponse?, chain: FilterChain?) {
         val csrf = req?.getAttribute(CsrfToken::class.java.name) as CsrfToken?

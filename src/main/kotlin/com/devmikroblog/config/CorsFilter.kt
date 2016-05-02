@@ -11,8 +11,6 @@ import javax.servlet.http.HttpServletResponse
 /**
  * Created by dominik on 27.03.16.
  */
-@Component
-@Order(org.springframework.core.Ordered.HIGHEST_PRECEDENCE)
 class CorsFilter : Filter {
     override fun destroy() {
     }
