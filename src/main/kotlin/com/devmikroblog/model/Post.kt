@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull
  */
 @Entity
 @Table(name = "Posts")
-open class Post():Serializable{
+class Post():Serializable{
 
     constructor(id:Int, message:String, rate: Int, author:User, comments:List<Post>, tags:List<Tag>) : this(){
         this.id = id;

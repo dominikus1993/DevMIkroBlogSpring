@@ -12,7 +12,7 @@ import java.util.function.Predicate
  */
 object PostServiceMocks {
     public val predicateById = Predicate<Post> { x -> x.id == 1 }
-    public val predicateByAuthorLogin = Predicate<Post> { x -> x.author?.login == "dominikus1993" }
+    public val predicateByAuthorLogin = Predicate<Post> { x -> x.author.login == "dominikus1993" }
     public val testPost = Post(1, "Test", 1, User(), listOf(), listOf())
 
     fun getIPostRepositoryMock(): IPostRepository{
