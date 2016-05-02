@@ -6,7 +6,6 @@ import com.devmikroblog.model.Tag
 import com.devmikroblog.model.User
 import com.devmikroblog.repositories.BaseRepository
 import com.devmikroblog.repositories.interfaces.IPostRepository
-import com.devmikroblog.sessionStrategy
 import org.hibernate.SessionFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Repository

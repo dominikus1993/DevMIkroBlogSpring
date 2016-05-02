@@ -40,7 +40,6 @@ class CommentsRepository : BaseRepository ,ICommentsRepository {
         try{
             session.beginTransaction()
             val parentPost = (session.get(Post::class.java, parent?.id) as Post)
-            val commentId = session.save(comment) as Int
             parentPost.comments.toMutableList().add(comment as Post)
             session.saveOrUpdate(parentPost)
             session.transaction.commit()
