@@ -43,7 +43,13 @@ open class UserRepository : BaseRepository, IUserRepository{
     }
 
     override fun isAdmin(userId: Int): Boolean {
-        throw UnsupportedOperationException()
+        val session = getCurrentSession()
+        try{
+            val user = session.get(User::class.java, userId) as User
+            return user.role.equals(Role.ADMIN)
+        }catch(ex:Exception){
+            return false
+        }
     }
 
     override fun changeRole(userId: Int, role: Role): Boolean {
