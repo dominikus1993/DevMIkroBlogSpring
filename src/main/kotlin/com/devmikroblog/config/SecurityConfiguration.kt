@@ -36,7 +36,6 @@ open class SecurityConfiguration : WebSecurityConfigurerAdapter() {
     override fun configure(auth: AuthenticationManagerBuilder?) {
         super.configure(auth)
         auth?.userDetailsService(userService)
-        //auth?.inMemoryAuthentication()?.withUser("user")?.password("passowrd")?.roles(Role.USER.role)
     }
 
 
