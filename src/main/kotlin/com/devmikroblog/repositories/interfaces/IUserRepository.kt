@@ -12,4 +12,5 @@ public interface IUserRepository : ICrudable<User>{
     fun register(user: User):Boolean
     fun isAdmin(userId:Int):Boolean
     fun changeRole(userId: Int, role: Role):Boolean
+    fun isOwner(postId: Int, userId: Int): Boolean
 }

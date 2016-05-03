@@ -80,4 +80,14 @@ open class UserRepository : BaseRepository, IUserRepository{
         throw UnsupportedOperationException()
     }
 
+    override fun isOwner(postId: Int, userId: Int): Boolean {
+        val session = getCurrentSession()
+        try{
+            val post = session.get(Post::class.java, postId) as Post
+            return post.author.id == userId
+        }catch(ex:Exception){
+            return false
+        }
+    }
+
 }
