@@ -1,5 +1,5 @@
 ///<reference path="tsd.d.ts"/>
 
 module Urls{
-    const getAllPosts = "/api/post/getAll"
+    export const getAllPosts = "/api/post/getAll"
 }

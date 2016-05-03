@@ -61,34 +61,40 @@ public class User(): UserDetails, Serializable{
     var login:String = ""
         @NotNull
         @Column(unique = true)
+        @JsonProperty(access = JsonProperty.Access.READ_WRITE)
         get
         set
 
     var userPassword:String = ""
         @NotNull
+        @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
         get
         set
 
     var activated = false
         @NotNull
         @Column(nullable = false)
+        @JsonProperty(access = JsonProperty.Access.READ_ONLY)
         get
         set
 
     var posts:Set<Post> = setOf()
         @OneToMany(cascade = arrayOf(CascadeType.ALL))
         @LazyCollection(LazyCollectionOption.FALSE)
+        @JsonProperty(access = JsonProperty.Access.READ_ONLY)
         get
         set
 
     var role:Role = Role.USER
         @NotNull
+        @JsonProperty(access = JsonProperty.Access.READ_ONLY)
         get
         set
 
     var persistentTokens:Set<Token> = setOf()
         @JsonIgnore
         @OneToMany(cascade = arrayOf(CascadeType.ALL))
+        @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
         get
         set
 
