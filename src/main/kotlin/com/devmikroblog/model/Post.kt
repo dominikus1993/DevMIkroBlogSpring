@@ -1,5 +1,6 @@
 package com.devmikroblog.model
 
+import com.fasterxml.jackson.annotation.JsonProperty
 import org.hibernate.annotations.LazyCollection
 import org.hibernate.annotations.LazyCollectionOption
 import java.io.Serializable
@@ -31,17 +32,20 @@ class Post():Serializable{
 
     var message:String = ""
         @Column
+        @JsonProperty(access = JsonProperty.Access.READ_WRITE)
         get
         set
 
     var rate:Int = 0
         @Column
+        @JsonProperty(access = JsonProperty.Access.READ_ONLY)
         get
         set
 
     var author:User = User()
         @NotNull
         @ManyToOne
+        @JsonProperty(access = JsonProperty.Access.READ_ONLY)
         get
         set
 
@@ -51,6 +55,7 @@ class Post():Serializable{
             joinColumns = arrayOf(JoinColumn(name = "PostId")),
             inverseJoinColumns = arrayOf(JoinColumn(name = "CommentsId")))
         @LazyCollection(LazyCollectionOption.FALSE)
+        @JsonProperty(access = JsonProperty.Access.READ_ONLY)
         get
         set
 
@@ -60,12 +65,14 @@ class Post():Serializable{
             joinColumns = arrayOf(JoinColumn(name = "PostId")),
             inverseJoinColumns = arrayOf(JoinColumn(name = "TagId")))
         @LazyCollection(LazyCollectionOption.FALSE)
+        @JsonProperty(access = JsonProperty.Access.READ_ONLY)
         get
         set
 
     var votes:Set<Vote> = setOf()
         @OneToMany(mappedBy = "post")
         @LazyCollection(LazyCollectionOption.FALSE)
+        @JsonProperty(access = JsonProperty.Access.READ_ONLY)
         get
         set
 

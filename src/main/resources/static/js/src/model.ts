@@ -2,7 +2,7 @@
 module Model{
     export class Result<T>{
         value:T;
-        isSuccess:boolean;
+        success:boolean;
     }
 
     export class UserForLogin{
@@ -11,7 +11,17 @@ module Model{
         public isRemember:boolean = true;
     }
 
-    export class Post{
+    export class User{
+        public id:number = 0;
+        public login:string = "";
+        public role: "USER" | "ADMIN"
+    }
 
+    export class Post{
+        public id: number = 0;
+        public message: string = "";
+        public rate: number = 0;
+        public author:User;
+        public comments: Post[];
     }
 }

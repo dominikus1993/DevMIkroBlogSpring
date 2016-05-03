@@ -20,26 +20,33 @@ import javax.validation.constraints.NotNull
 public class User(): UserDetails, Serializable{
 
     @Transient
+    @JsonIgnore
     override fun getPassword(): String? = userPassword
 
     @Transient
+    @JsonIgnore
     override fun getUsername(): String? = login
 
     @Transient
+    @JsonIgnore
     override fun isCredentialsNonExpired(): Boolean = true
 
     @Transient
+    @JsonIgnore
     override fun isAccountNonExpired(): Boolean = true
 
     @Transient
+    @JsonIgnore
     override fun isAccountNonLocked(): Boolean = true
 
     @Transient
+    @JsonIgnore
     override fun getAuthorities(): MutableCollection<out GrantedAuthority>? {
        return AuthorityUtils.createAuthorityList(role.role)
     }
 
     @Transient
+    @JsonIgnore
     override fun isEnabled(): Boolean = activated
 
     constructor(id:Int, login:String, userPassword:String, posts:Set<Post>, role: Role, persistentTokens:Set<Token>) : this(){
@@ -67,21 +74,21 @@ public class User(): UserDetails, Serializable{
 
     var userPassword:String = ""
         @NotNull
-        @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+        @JsonIgnore
         get
         set
 
     var activated = false
         @NotNull
         @Column(nullable = false)
-        @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+        @JsonIgnore
         get
         set
 
     var posts:Set<Post> = setOf()
         @OneToMany(cascade = arrayOf(CascadeType.ALL))
         @LazyCollection(LazyCollectionOption.FALSE)
-        @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+        @JsonIgnore
         get
         set
 
@@ -94,7 +101,6 @@ public class User(): UserDetails, Serializable{
     var persistentTokens:Set<Token> = setOf()
         @JsonIgnore
         @OneToMany(cascade = arrayOf(CascadeType.ALL))
-        @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
         get
         set
 
