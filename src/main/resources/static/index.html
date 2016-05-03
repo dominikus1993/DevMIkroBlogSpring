@@ -6,29 +6,63 @@
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
 </head>
 <body>
-    <!--<div ng-controller="NavigationController as navigation" class="container">-->
-        <!--<ul class="nav nav-pills" role="tablist">-->
-            <!--<li class="active"><a href="#/">Home</a></li>-->
-            <!--<li><a href="#/login">Login</a></li>-->
-            <!--<li ng-show="authenticated"><a href="" ng-click="logout()">logout</a></li>-->
-        <!--</ul>-->
-    <!--</div>-->
-    <div class="container">
-        <div ng-controller="HomeController as home">
-            <p> The Id is {{home.greeting.id}}</p>
-            <p> The content is {{home.greeting.content}}</p>
+<!--<div ng-controller="NavigationController as navigation" class="container">-->
+<!--<ul class="nav nav-pills" role="tablist">-->
+<!--<li class="active"><a href="#/">Home</a></li>-->
+<!--<li><a href="#/login">Login</a></li>-->
+<!--<li ng-show="authenticated"><a href="" ng-click="logout()">logout</a></li>-->
+<!--</ul>-->
+<!--</div>-->
+<div ng-controller="PostController as pc">
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+    <div class="container" ng-repeat="post in pc.posts">
+        <div class="col-sm-12">
+            <div class="panel panel-white post panel-shadow">
+                <div class="post-heading">
+                    <div class="pull-left image">
+                        <img src="http://bootdey.com/img/Content/user_1.jpg" class="img-circle avatar"
+                             alt="user profile image">
+                    </div>
+                    <div class="pull-left meta">
+                        <div class="title h5">
+                            <a href="#!/Author/{{post.author.login}}"><b>{{post.author.login}}</b></a>
+                            dodał wpis.
+                        </div>
+                        <h6 class="text-muted time">2</h6>
+                    </div>
+                </div>
+                <div class="post-description">
+                    <p ng-bind-html="post.message"></p>
+                    <div class="stats">
+                        <!--<a href="" class="btn btn-default stat-item"-->
+                           <!--ng-click="(pc.userVotedUp(post.Id, post.AuthorId) || !$root.isLogged) || pc.voteUp(post.Id)"-->
+                           <!--ng-disabled="(pc.userVotedUp(post.Id) || !$root.isLogged)">-->
+                            <!--<i class="fa fa-thumbs-up icon"></i>{{post.Rate}}-->
+                        <!--</a>-->
+                        <!--<a href="#!/Post/{{post.Id}}" class="btn btn-default stat-item">-->
+                            <!--<i class="fa fa-share icon"></i>Wejdź-->
+                        <!--</a>-->
+                        <!--<a href="" onclick="confirm('Napewno chcesz usunąć swój cenny wpis?')"-->
+                           <!--ng-click="pc.delete(post.Id)" ng-show="pc.isOwner(post.AuthorName)"-->
+                           <!--class="btn btn-default stat-item">-->
+                            <!--<i class="glyphicon glyphicon-remove icon"></i>Usuń-->
+                        <!--</a>-->
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
-    <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-    <script type="text/javascript" src="bower_components/angular/angular.js"></script>
-    <script type="text/javascript" src="bower_components/angular-route/angular-route.js"></script>
-    <script type="text/javascript" src="js/src/main.js"></script>
-    <script type="text/javascript" src="js/src/urls.js"></script>
-    <script type="text/javascript" src="js/src/model.js"></script>
-    <script type="text/javascript" src="js/src/postService.js"></script>
-    <script type="text/javascript" src="js/src/homeController.js"></script>
-    <script type="text/javascript" src="js/src/postController.js"></script>
+</div>
+<script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
+<script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script type="text/javascript" src="bower_components/angular/angular.js"></script>
+<script type="text/javascript" src="bower_components/angular-route/angular-route.js"></script>
+<script type="text/javascript" src="js/src/main.js"></script>
+<script type="text/javascript" src="js/src/urls.js"></script>
+<script type="text/javascript" src="js/src/model.js"></script>
+<script type="text/javascript" src="js/src/postService.js"></script>
+<script type="text/javascript" src="js/src/homeController.js"></script>
+<script type="text/javascript" src="js/src/postController.js"></script>
 </body>
 </html>
