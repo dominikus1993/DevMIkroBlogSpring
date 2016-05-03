@@ -40,11 +40,14 @@ open class UserRepository : BaseRepository, IUserRepository{
     }
 
     override fun read(predicate: Predicate<User>): User? {
-        throw UnsupportedOperationException()
+        val users = read()
+        return users?.find { it -> predicate.test(it) }
     }
 
+    @Suppress("UNCHECKED_CAST")
     override fun read(): List<User>? {
-        throw UnsupportedOperationException()
+        val session = getCurrentSession()
+        return session.createCriteria(Post::class.java).list() as List<User>
     }
 
 
