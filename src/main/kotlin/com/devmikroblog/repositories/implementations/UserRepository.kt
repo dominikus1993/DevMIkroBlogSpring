@@ -29,7 +29,17 @@ open class UserRepository : BaseRepository, IUserRepository{
     }
 
     override fun register(user: User): Boolean {
-        throw UnsupportedOperationException()
+        try{
+            if(read()?.find{ x-> x.login.equals(user.login)} == null){
+                getCurrentSession().save(user);
+                return true
+            }
+            else{
+                return false;
+            }
+        }catch(ex:Exception){
+            return false
+        }
     }
 
     override fun isAdmin(userId: Int): Boolean {
