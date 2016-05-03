@@ -8,7 +8,7 @@ module Controllers{
         public posts: Model.Post[];
 
         constructor(private rootSocpe:ng.IRootElementService, private scope:ng.IScope, private postService:IPostService){
-
+            this.getAll();
         }
 
         public getAll(){
