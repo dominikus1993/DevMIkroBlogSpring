@@ -22,7 +22,7 @@ public class UserService : IUserService{
     }
 
     override fun login(username: String, password: String): Result<User?> {
-        throw UnsupportedOperationException()
+        return Result.ErrorWhenNoData(userRepository.login(username, password))
     }
 
     override fun register(user: User): Result<Boolean> {
