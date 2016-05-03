@@ -5,7 +5,7 @@
 module Services{
     import Result = Model.Result;
     export interface IPostService{
-        getAll(callback: (data:Model.Result<Model.Post[]>) => void);
+        getAll(callback: (data:Model.HttpData<Model.Post[]>) => void);
     }
 
     export class PostService implements IPostService{
@@ -16,8 +16,8 @@ module Services{
             this.http = $http;
         }
 
-        getAll(callback: (data:Model.Result<Model.Post[]>) => void){
-            return this.http.get(Urls.getAllPosts).then((res:Model.Result<Model.Post[]>) => {
+        getAll(callback: (data:Model.HttpData<Model.Post[]>) => void){
+            return this.http.get(Urls.getAllPosts).then((res:Model.HttpData<Model.Post[]>) => {
                 callback(res);
                 return res;
             }).catch((error) => {

@@ -5,6 +5,13 @@ module Model{
         success:boolean;
     }
 
+    export class HttpData<T>{
+        public config:any;
+        public data: Result<T>;
+        public status:number;
+        public statusText:string;
+    }
+
     export class UserForLogin{
         public userName:string = "";
         public password:string = "";

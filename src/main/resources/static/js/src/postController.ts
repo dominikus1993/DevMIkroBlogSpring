@@ -12,9 +12,11 @@ module Controllers{
         }
 
         public getAll(){
-            this.postService.getAll((data: Model.Result<Model.Post[]>) => {
-                if(data.success){
-                    this.posts = data.value.reverse();
+            this.postService.getAll((result: Model.HttpData<Model.Post[]>) => {
+                console.log(":dfsaadsf");
+                console.log(result);
+                if(result.status == 200 && result.data.success){
+                    this.posts = result.data.value.reverse();
                 }
             });
         }
