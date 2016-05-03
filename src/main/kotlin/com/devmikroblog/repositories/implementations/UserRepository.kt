@@ -23,8 +23,9 @@ open class UserRepository : BaseRepository, IUserRepository{
 
     }
 
-    override fun login(username: String, password: String): User {
-        throw UnsupportedOperationException()
+    override fun login(username: String, password: String): User? {
+        val user = read()?.find { x -> x.login.equals(username) && x.password.equals(password) }
+        return user as? User ?: null
     }
 
     override fun register(user: User): Boolean {

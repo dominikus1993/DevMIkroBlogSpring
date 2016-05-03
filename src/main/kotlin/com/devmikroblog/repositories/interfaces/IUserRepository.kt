@@ -8,7 +8,7 @@ import com.devmikroblog.model.User
  */
 
 public interface IUserRepository : ICrudable<User>{
-    fun login(username:String, password:String):User
+    fun login(username:String, password:String): User?
     fun register(user: User):Boolean
     fun isAdmin(userId:Int):Boolean
     fun changeRole(userId: Int, role: Role):Boolean
