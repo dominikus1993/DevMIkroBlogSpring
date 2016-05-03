@@ -4,6 +4,7 @@ import com.devmikroblog.model.Post
 import com.devmikroblog.model.Result
 import com.devmikroblog.services.interfaces.IPostService
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.security.access.annotation.Secured
 import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession
 import org.springframework.web.bind.annotation.PathVariable
@@ -38,7 +39,6 @@ class PostController : BaseController{
     }
 
     @RequestMapping("create")
-    @PreAuthorize("")
     fun create(@RequestBody post:Post):Result<Post?>{
         val createResult = service.create(post);
         if(createResult.isSuccess && createResult.value){

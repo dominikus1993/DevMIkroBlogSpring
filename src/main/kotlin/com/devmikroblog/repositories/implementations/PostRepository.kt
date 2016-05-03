@@ -5,6 +5,7 @@ import com.devmikroblog.repositories.BaseRepository
 import com.devmikroblog.repositories.interfaces.IPostRepository
 import org.hibernate.SessionFactory
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.stereotype.Repository
 import java.util.function.Predicate
 import javax.transaction.Transactional
@@ -32,6 +33,7 @@ open class PostRepository : BaseRepository, IPostRepository {
         return posts?.find { it -> predicate.test(it) }
     }
 
+    @PreAuthorize("hasRole('ADMIN') OR hasRole('USER')")
     override fun create(post: Post?): Boolean {
         try{
             getCurrentSession().save(post);
