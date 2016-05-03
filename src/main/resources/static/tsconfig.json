@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "amd",
+    "sourceMap": true,
+    "noImplicitAny": false,
+    "removeComments": false,
+    "preserveConstEnums": true
+  },
+  "exclude": [
+    "js/node_modules"
+  ],
+  "compileOnSave": true,
+  "buildOnSave": false
+}

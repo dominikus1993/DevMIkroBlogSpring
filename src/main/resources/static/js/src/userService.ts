@@ -1,6 +1,6 @@
 ///<reference path="tsd.d.ts"/>
 
-module DevMikroblog.Services{
+module Services{
     export interface IUserService{
         login():void;
         register():void;

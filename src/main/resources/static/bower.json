@@ -7,8 +7,8 @@
   "dependencies": {
     "angular": "1.5.2",
     "jquery": "^2.2.2",
-    "bootstrap":"3.3.5",
-    "angular-route":"1.5.4"
+    "bootstrap": "3.3.5",
+    "angular-route": "1.5.2"
   },
   "description": "spring app",
   "main": "main.js",

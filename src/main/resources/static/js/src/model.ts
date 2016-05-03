@@ -1,5 +1,5 @@
 
-module DevMikroblog.Models{
+module Model{
     export class Result<T>{
         value:T;
         isSuccess:boolean;
