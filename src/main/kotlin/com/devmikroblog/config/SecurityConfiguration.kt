@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.web.csrf.CsrfTokenRepository
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher
 import javax.sql.DataSource
 
 
@@ -48,7 +49,18 @@ open class SecurityConfiguration : WebSecurityConfigurerAdapter() {
     }
 
     override fun configure(http: HttpSecurity?) {
-        http?.authorizeRequests()?.antMatchers("/bower_components/**")
+        http?.authorizeRequests()
+                ?.antMatchers("/**/*.{js,html}")
+                ?.permitAll()
+                ?.anyRequest()
+                ?.authenticated()
+                ?.and()
+                ?.formLogin()
+                ?.loginPage("/views/login.html")
+                ?.permitAll()
+                ?.and()
+                ?.logout()
+                ?.logoutRequestMatcher(AntPathRequestMatcher(Route))
     }
 
 
