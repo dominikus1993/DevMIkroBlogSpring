@@ -32,7 +32,7 @@ open class SecurityConfiguration : WebSecurityConfigurerAdapter() {
     override fun configure(auth: AuthenticationManagerBuilder?) {
         auth?.jdbcAuthentication()?.dataSource(dataSource)
                 ?.usersByUsernameQuery("SELECT id, activated, login, role, user_password FROM users WHERE login = ?")
-                ?.authoritiesByUsernameQuery("SELECT login, role FROM users WHERE login = 'dominikus1993';");
+                ?.authoritiesByUsernameQuery("SELECT login, role FROM users WHERE login = ?");
     }
 
 
@@ -48,17 +48,7 @@ open class SecurityConfiguration : WebSecurityConfigurerAdapter() {
     }
 
     override fun configure(http: HttpSecurity?) {
-//        http?.httpBasic()?.and()?.authorizeRequests()
-//                ?.antMatchers("/index", "/home", "/")?.permitAll()
-//                ?.anyRequest()?.authenticated()?.and()?.formLogin()?.loginProcessingUrl("/api/authentication")
-//                ?.usernameParameter("username")
-//                ?.passwordParameter("password")
-//                ?.permitAll()
-//                ?.permitAll()?.and()?.logout()?.logoutUrl("/api/logout")?.deleteCookies("JSESSIONID", "CSRF-TOKEN")
-//                ?.permitAll()
-//                ?.and()?.csrf()?.disable()?.authorizeRequests()
-//                ?.antMatchers("/api/post")?.permitAll()
-        http?.antMatcher("/**")?.anonymous()
+        http?.authorizeRequests()?.antMatchers("/bower_components/**")
     }
 
 
