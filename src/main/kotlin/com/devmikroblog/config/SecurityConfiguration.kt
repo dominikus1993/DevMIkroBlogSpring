@@ -1,5 +1,6 @@
 package com.devmikroblog.config
 
+import com.devmikroblog.utils.Urls
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.HttpMethod
@@ -60,7 +61,11 @@ open class SecurityConfiguration : WebSecurityConfigurerAdapter() {
                 ?.permitAll()
                 ?.and()
                 ?.logout()
-                ?.logoutRequestMatcher(AntPathRequestMatcher(Route))
+                ?.logoutRequestMatcher(AntPathRequestMatcher(Urls.Logout))
+                ?.permitAll()
+                ?.and()
+                ?.csrf()
+                ?.disable()
     }
 
 
