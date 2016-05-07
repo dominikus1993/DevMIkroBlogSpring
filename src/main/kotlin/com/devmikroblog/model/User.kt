@@ -94,6 +94,7 @@ public class User(): UserDetails, Serializable{
 
     var role:Role = Role.USER
         @NotNull
+        @Enumerated(EnumType.STRING)
         @JsonProperty(access = JsonProperty.Access.READ_ONLY)
         get
         set
