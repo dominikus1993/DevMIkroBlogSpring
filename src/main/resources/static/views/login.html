@@ -1,10 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Login Page</title>
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css">
 </head>
-<body>
 
+<body>
+<div class="wrapper col-md-2 col-md-offset-5">
+
+    <h2 class="text-center">Login</h2>
+    <form class="form-login" method="post">
+        <input type="text" class="form-control" name="login" placeholder="login"/>
+        <input type="password" class="form-control" name="password" placeholder="Password"/>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" value="login">Login</button>
+    </form>
+    <div>
+        <a href="/views/register.html">Register</a>
+    </div>
+
+</div>
 </body>
-</html>
