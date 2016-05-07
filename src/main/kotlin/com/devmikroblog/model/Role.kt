@@ -4,6 +4,6 @@ package com.devmikroblog.model
  * Created by dominik on 28.03.16.
  */
 enum class Role(val role:String){
-    ADMIN("Admin"),
-    USER("User")
+    ADMIN("ADMIN"),
+    USER("USER")
 }

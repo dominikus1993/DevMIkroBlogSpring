@@ -33,7 +33,7 @@ open class PostRepository : BaseRepository, IPostRepository {
         return posts?.find { it -> predicate.test(it) }
     }
 
-    @PreAuthorize("hasRole('ADMIN') OR hasRole('USER')")
+    @PreAuthorize("hasRole('Admin') OR hasRole('User')")
     override fun create(post: Post?): Boolean {
         try{
             getCurrentSession().save(post);
