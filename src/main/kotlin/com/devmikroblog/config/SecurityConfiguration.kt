@@ -50,22 +50,13 @@ open class SecurityConfiguration : WebSecurityConfigurerAdapter() {
     }
 
     override fun configure(http: HttpSecurity?) {
-        http?.authorizeRequests()
+        http?.httpBasic()
+                ?.and()
+                ?.authorizeRequests()
                 ?.antMatchers("/**/*.{js,html}")
                 ?.permitAll()
                 ?.anyRequest()
                 ?.authenticated()
-                ?.and()
-                ?.formLogin()
-                ?.loginPage("/views/login.html")
-                ?.permitAll()
-                ?.and()
-                ?.logout()
-                ?.logoutRequestMatcher(AntPathRequestMatcher(Urls.Logout))
-                ?.permitAll()
-                ?.and()
-                ?.csrf()
-                ?.disable()
     }
 
 
