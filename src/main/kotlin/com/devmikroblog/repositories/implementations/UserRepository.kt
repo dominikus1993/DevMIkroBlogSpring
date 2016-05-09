@@ -6,6 +6,7 @@ import com.devmikroblog.model.User
 import com.devmikroblog.repositories.BaseRepository
 import com.devmikroblog.repositories.interfaces.IUserRepository
 import org.hibernate.SessionFactory
+import org.hibernate.criterion.Restrictions
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Repository
 import java.util.function.Predicate
@@ -16,10 +17,10 @@ import javax.transaction.Transactional
  */
 @Repository
 @Transactional
-open class UserRepository : BaseRepository, IUserRepository{
+open class UserRepository : BaseRepository, IUserRepository {
 
     @Autowired
-    constructor(sessionFactory: SessionFactory) : super(sessionFactory){
+    constructor(sessionFactory: SessionFactory) : super(sessionFactory) {
 
     }
 
@@ -29,25 +30,31 @@ open class UserRepository : BaseRepository, IUserRepository{
     }
 
     override fun register(user: User): Boolean {
-        try{
-            if(read()?.find{ x-> x.login.equals(user.login)} == null){
+        try {
+            if (read()?.find { x -> x.login.equals(user.login) } == null) {
                 getCurrentSession().save(user);
                 return true
-            }
-            else{
+            } else {
                 return false;
             }
-        }catch(ex:Exception){
+        } catch(ex: Exception) {
             return false
         }
     }
 
+    override fun getUserByUsername(username: String): User? {
+        val session = getCurrentSession()
+        val user = session.createCriteria(User::class.java).add(Restrictions.eq("login", username)).uniqueResult() as User?
+        return user
+
+    }
+
     override fun isAdmin(userId: Int): Boolean {
         val session = getCurrentSession()
-        try{
+        try {
             val user = session.get(User::class.java, userId) as User
             return user.role.equals(Role.ADMIN)
-        }catch(ex:Exception){
+        } catch(ex: Exception) {
             return false
         }
     }
@@ -82,10 +89,10 @@ open class UserRepository : BaseRepository, IUserRepository{
 
     override fun isOwner(postId: Int, userId: Int): Boolean {
         val session = getCurrentSession()
-        try{
+        try {
             val post = session.get(Post::class.java, postId) as Post
             return post.author.id == userId
-        }catch(ex:Exception){
+        } catch(ex: Exception) {
             return false
         }
     }

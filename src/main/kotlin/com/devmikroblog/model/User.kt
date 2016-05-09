@@ -87,7 +87,7 @@ public class User(): UserDetails, Serializable{
 
     var posts:Set<Post> = setOf()
         @OneToMany(cascade = arrayOf(CascadeType.ALL))
-        @LazyCollection(LazyCollectionOption.FALSE)
+        @LazyCollection(LazyCollectionOption.TRUE)
         @JsonIgnore
         get
         set

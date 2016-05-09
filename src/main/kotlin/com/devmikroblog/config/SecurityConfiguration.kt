@@ -32,9 +32,7 @@ open class SecurityConfiguration : WebSecurityConfigurerAdapter() {
     private lateinit var dataSource: DataSource
 
     override fun configure(auth: AuthenticationManagerBuilder?) {
-        auth?.jdbcAuthentication()?.dataSource(dataSource)
-                ?.usersByUsernameQuery("SELECT id, activated, login, role, user_password FROM users WHERE login = ?")
-                ?.authoritiesByUsernameQuery("SELECT login, role FROM users WHERE login = ?");
+        auth?.userDetailsService(userService)
     }
 
 

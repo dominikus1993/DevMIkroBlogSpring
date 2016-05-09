@@ -25,7 +25,7 @@ public class UserService : IUserService, UserDetailsService {
     }
 
     override fun loadUserByUsername(username: String?): UserDetails? {
-        return userRepository.read(Predicate { x -> x.username?.equals(username) as? Boolean ?: false })
+        return userRepository.getUserByUsername(username as String)
     }
 
     override fun login(username: String, password: String): Result<User?> {
