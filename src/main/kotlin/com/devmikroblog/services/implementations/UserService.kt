@@ -3,6 +3,7 @@ package com.devmikroblog.services.implementations
 import com.devmikroblog.model.Result
 import com.devmikroblog.model.Role
 import com.devmikroblog.model.User
+import com.devmikroblog.model.UserForCreating
 import com.devmikroblog.repositories.interfaces.IUserRepository
 import com.devmikroblog.services.interfaces.IUserService
 import org.springframework.beans.factory.annotation.Autowired
@@ -32,8 +33,15 @@ public class UserService : IUserService, UserDetailsService {
         return Result.ErrorWhenNoData(userRepository.login(username, password))
     }
 
-    override fun register(user: User): Result<Boolean> {
-        throw UnsupportedOperationException()
+    override fun register(user: UserForCreating): Result<Boolean> {
+        val userByUsername = loadUserByUsername(user.username)
+
+        if(user.password.equals(user.confirmPassword) && userByUsername == null){
+            val result = userRepository.create(UserForCreating.toUser(user))
+            return Result.ErrorWhenNoData(result)
+        }
+
+        return Result(false)
     }
 
     override fun isAdmin(userId: Int): Result<Boolean> {
