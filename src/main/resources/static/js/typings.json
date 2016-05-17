@@ -4,5 +4,11 @@
   "ambientDependencies": {
     "jquery": "github:DefinitelyTyped/DefinitelyTyped/jquery/jquery.d.ts#299b5caa22876ef27dc8e9a5b7fd7bf93457b6f4",
     "angular": "github:DefinitelyTyped/DefinitelyTyped/angularjs/angular.d.ts#299b5caa22876ef27dc8e9a5b7fd7bf93457b6f4"
+  },
+  "dependencies": {
+    "debug": "registry:npm/debug#2.0.0+20160511151334"
+  },
+  "globalDependencies": {
+    "angular-cookies": "registry:dt/angular-cookies#1.4.0+20160317120654"
   }
 }

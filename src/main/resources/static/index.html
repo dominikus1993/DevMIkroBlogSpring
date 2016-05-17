@@ -8,58 +8,106 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<!--<div ng-controller="NavigationController as navigation" class="container">-->
-<!--<ul class="nav nav-pills" role="tablist">-->
-<!--<li class="active"><a href="#/">Home</a></li>-->
-<!--<li><a href="#/login">Login</a></li>-->
-<!--<li ng-show="authenticated"><a href="" ng-click="logout()">logout</a></li>-->
-<!--</ul>-->
-<!--</div>-->
-<div ng-controller="PostController as pc">
-    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
-    <div class="container" ng-repeat="post in pc.posts">
-        <div class="col-sm-12">
-            <div class="panel panel-white post panel-shadow">
-                <div class="post-heading">
-                    <div class="pull-left image">
-                        <img src="http://bootdey.com/img/Content/user_1.jpg" class="img-circle avatar"
-                             alt="user profile image">
-                    </div>
-                    <div class="pull-left meta">
-                        <div class="title h5">
-                            <a href="#!/Author/{{post.author.login}}"><b>{{post.author.login}}</b></a>
-                            dodał wpis.
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#!/">Dev Mikroblog</a>
+        </div>
+        <div class="navbar-collapse collapse" ng-controller="UserController as account">
+            <ul class="nav navbar-nav">
+                <li><a href="#!/">Home</a></li>
+                <li><a href="#!/Tag/javascript">Javascript</a></li>
+                <li>@Html.ActionLink("API", "Index", "Help", new {area = ""}, null)</li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right" id="logOff">
+                <li style="color: white;" ng-show="$root.isLogged"><a href="#">Witaj! <i>{{account.userName}}</i></a>
+                </li>
+                <li>
+                    <button class="btn btn-primary" ng-click="account.logout()" ng-show="$root.isLogged">Wyloguj się
+                    </button>
+                </li>
+                <li>
+                    <button class="btn btn-primary" ng-click="account.logout()" ng-show="$root.isLogged">Wyloguj się
+                    </button>
+                </li>
+                <li>
+                    <button class="btn btn-primary" ng-click="account.logout()" ng-show="$root.isLogged">Wyloguj się
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="container body-content">
+
+    <!--<div ng-controller="NavigationController as navigation" class="container">-->
+    <!--<ul class="nav nav-pills" role="tablist">-->
+    <!--<li class="active"><a href="#/">Home</a></li>-->
+    <!--<li><a href="#/login">Login</a></li>-->
+    <!--<li ng-show="authenticated"><a href="" ng-click="logout()">logout</a></li>-->
+    <!--</ul>-->
+    <!--</div>-->
+    <div ng-controller="PostController as pc">
+        <link rel="stylesheet" type="text/css"
+              href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+        <div class="container" ng-repeat="post in pc.posts">
+            <div class="col-sm-12">
+                <div class="panel panel-white post panel-shadow">
+                    <div class="post-heading">
+                        <div class="pull-left image">
+                            <img src="http://bootdey.com/img/Content/user_1.jpg" class="img-circle avatar"
+                                 alt="user profile image">
                         </div>
-                        <h6 class="text-muted time">2</h6>
+                        <div class="pull-left meta">
+                            <div class="title h5">
+                                <a href="#!/Author/{{post.author.login}}"><b>{{post.author.login}}</b></a>
+                                dodał wpis.
+                            </div>
+                            <h6 class="text-muted time">2</h6>
+                        </div>
                     </div>
-                </div>
-                <div class="post-description">
-                    <p>{{post.message}}</p>
-                    <div class="stats">
-                        <!--<a href="" class="btn btn-default stat-item"-->
-                           <!--ng-click="(pc.userVotedUp(post.Id, post.AuthorId) || !$root.isLogged) || pc.voteUp(post.Id)"-->
-                           <!--ng-disabled="(pc.userVotedUp(post.Id) || !$root.isLogged)">-->
+                    <div class="post-description">
+                        <p>{{post.message}}</p>
+                        <div class="stats">
+                            <!--<a href="" class="btn btn-default stat-item"-->
+                            <!--ng-click="(pc.userVotedUp(post.Id, post.AuthorId) || !$root.isLogged) || pc.voteUp(post.Id)"-->
+                            <!--ng-disabled="(pc.userVotedUp(post.Id) || !$root.isLogged)">-->
                             <!--<i class="fa fa-thumbs-up icon"></i>{{post.Rate}}-->
-                        <!--</a>-->
-                        <!--<a href="#!/Post/{{post.Id}}" class="btn btn-default stat-item">-->
+                            <!--</a>-->
+                            <!--<a href="#!/Post/{{post.Id}}" class="btn btn-default stat-item">-->
                             <!--<i class="fa fa-share icon"></i>Wejdź-->
-                        <!--</a>-->
-                        <!--<a href="" onclick="confirm('Napewno chcesz usunąć swój cenny wpis?')"-->
-                           <!--ng-click="pc.delete(post.Id)" ng-show="pc.isOwner(post.AuthorName)"-->
-                           <!--class="btn btn-default stat-item">-->
+                            <!--</a>-->
+                            <!--<a href="" onclick="confirm('Napewno chcesz usunąć swój cenny wpis?')"-->
+                            <!--ng-click="pc.delete(post.Id)" ng-show="pc.isOwner(post.AuthorName)"-->
+                            <!--class="btn btn-default stat-item">-->
                             <!--<i class="glyphicon glyphicon-remove icon"></i>Usuń-->
-                        <!--</a>-->
+                            <!--</a>-->
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
+
+    <hr/>
+    <footer>
+        <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+    </footer>
 
 </div>
 <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
 <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
 <script type="text/javascript" src="bower_components/angular/angular.js"></script>
 <script type="text/javascript" src="bower_components/angular-route/angular-route.js"></script>
+<script type="text/javascript" src="bower_components/angular-cookies/angular-cookies.js"></script>
 <script type="text/javascript" src="js/src/main.js"></script>
 <script type="text/javascript" src="js/src/urls.js"></script>
 <script type="text/javascript" src="js/src/model.js"></script>
