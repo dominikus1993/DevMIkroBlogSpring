@@ -31,4 +31,5 @@ module Model{
         public author:User;
         public comments: Post[];
     }
+
 }

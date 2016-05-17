@@ -14,6 +14,8 @@ import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.web.csrf.CsrfTokenRepository
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher
+import org.springframework.security.web.util.matcher.RequestMatcher
+import java.util.regex.Pattern
 import javax.sql.DataSource
 
 
@@ -50,6 +52,8 @@ open class SecurityConfiguration : WebSecurityConfigurerAdapter() {
     override fun configure(http: HttpSecurity?) {
         http?.authorizeRequests()
                 ?.antMatchers("/**/*.{js,html}")
+                ?.permitAll()
+                ?.antMatchers("/**/api/auth/register")
                 ?.permitAll()
                 ?.anyRequest()
                 ?.authenticated()
