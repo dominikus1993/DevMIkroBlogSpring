@@ -13,8 +13,9 @@ const register = (() => {
             console.log("jestem");
             $.ajax({
                 type: "Post",
+                headers: {"Content-Type": "application/json"},
                 url: "api/auth/register",
-                data: {username: username, password: password, confirmPassword: confirm},
+                data: JSON.stringify({username: username, password: password, confirmPassword: confirm}),
                 success: (response:Model.HttpData<Model.Post[]>) => {
                     console.log(response);
                     if (response.status == 200 && response.data.success && response.data.value) {

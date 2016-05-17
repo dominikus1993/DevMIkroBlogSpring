@@ -1,12 +1,25 @@
 package com.devmikroblog.model
 
+import com.fasterxml.jackson.annotation.JsonProperty
+
 /**
  * Created by domin_000 on 17.05.2016.
  */
 class UserForCreating{
-    public  lateinit var username:String
-    public  lateinit var password:String
-    public  lateinit var confirmPassword:String
+    public var username:String  =""
+        @JsonProperty(access = JsonProperty.Access.READ_WRITE)
+        get
+        set
+
+    public var password:String = ""
+        @JsonProperty(access = JsonProperty.Access.READ_WRITE)
+        get
+        set
+
+    public var confirmPassword:String = ""
+        @JsonProperty(access = JsonProperty.Access.READ_WRITE)
+        get
+        set
 
     companion object{
         fun toUser(userForCreating: UserForCreating):User{
