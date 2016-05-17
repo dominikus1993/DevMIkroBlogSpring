@@ -8,6 +8,12 @@ module Services{
 
     export class UserService implements IUserService{
 
+        private http: ng.IHttpService;
+
+        constructor($http: ng.IHttpService) {
+            this.http = $http;
+        }
+
         login():void{
 
         }
