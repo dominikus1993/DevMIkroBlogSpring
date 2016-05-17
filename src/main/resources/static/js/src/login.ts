@@ -14,7 +14,7 @@ const register = (() => {
             $.ajax({
                 type: "Post",
                 url: "api/auth/register",
-                data: JSON.stringify({username: username, password: password, confirmPassword: confirm}),
+                data: {username: username, password: password, confirmPassword: confirm},
                 success: (response:Model.HttpData<Model.Post[]>) => {
                     console.log(response);
                     if (response.status == 200 && response.data.success && response.data.value) {
@@ -22,11 +22,13 @@ const register = (() => {
                     }
                 },
                 error: (error) => {
-                    console.log("jestem3");
                     console.log(error);
                     alert(error.responseJSON.message);
                 }
             })
+        }
+        else{
+            alert("Hasła nie są takie same")
         }
     };
 })();

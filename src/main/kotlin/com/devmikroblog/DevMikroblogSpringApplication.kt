@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration
 import org.springframework.context.annotation.Bean
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession
 import org.springframework.session.web.http.HeaderHttpSessionStrategy
+import org.springframework.web.servlet.config.annotation.EnableWebMvc
 
 @SpringBootApplication
 @EnableRedisHttpSession
@@ -22,6 +23,7 @@ fun main(args: Array<String>) {
 fun sessionStrategy():HeaderHttpSessionStrategy{
     return HeaderHttpSessionStrategy()
 }
+
 
 //@RequestMapping("token")
 //fun token(session: HttpSession):Map<String, String>{

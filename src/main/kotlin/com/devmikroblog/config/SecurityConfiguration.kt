@@ -59,7 +59,7 @@ open class SecurityConfiguration : WebSecurityConfigurerAdapter() {
                 ?.authenticated()
                 ?.and()
                 ?.formLogin()
-                ?.loginPage("/views/login.html")
+                ?.loginPage("/login.html")
                 ?.permitAll()
                 ?.and()
                 ?.logout()
