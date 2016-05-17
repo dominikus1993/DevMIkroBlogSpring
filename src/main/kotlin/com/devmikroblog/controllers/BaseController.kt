@@ -8,5 +8,5 @@ import org.springframework.beans.factory.annotation.Autowired
  */
 open class BaseController{
     @Autowired
-    private lateinit var userService: IUserService;
+    protected lateinit var userService: IUserService;
 }
