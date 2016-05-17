@@ -22,8 +22,8 @@ class IdentityController : BaseController() {
     fun user(user:Principal):Principal{
         return user;
     }
-    @RequestMapping(method = arrayOf(RequestMethod.GET), value = "register")
+    @RequestMapping(method = arrayOf(RequestMethod.POST), value = "register")
     fun register(@RequestBody user:UserForCreating) : Result<Boolean> {
-        return userService.register(UserForCreating.toUser(user))
+        return userService.register(user)
     }
 }

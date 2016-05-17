@@ -37,7 +37,7 @@ public class UserService : IUserService, UserDetailsService {
         val userByUsername = loadUserByUsername(user.username)
 
         if(user.password.equals(user.confirmPassword) && userByUsername == null){
-            val result = userRepository.create(UserForCreating.toUser(user))
+            val result = userRepository.register(UserForCreating.toUser(user))
             return Result.ErrorWhenNoData(result)
         }
 
