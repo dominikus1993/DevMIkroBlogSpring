@@ -16,10 +16,13 @@ const register = (() => {
                 headers: {"Content-Type": "application/json"},
                 url: "api/auth/register",
                 data: JSON.stringify({username: username, password: password, confirmPassword: confirm}),
-                success: (response:Model.HttpData<Model.Post[]>) => {
+                success: (response:Model.Result<boolean>) => {
                     console.log(response);
-                    if (response.status == 200 && response.data.success && response.data.value) {
+                    if (response.success && response.value) {
                         location.href = "/";
+                    }
+                    else{
+                        alert("Nie udało się zarejestrować użytkownika")
                     }
                 },
                 error: (error) => {
