@@ -33,6 +33,11 @@ open class PostRepository : BaseRepository, IPostRepository {
         return posts?.find { it -> predicate.test(it) }
     }
 
+    override fun getPostById(id: Int) : Post? {
+        val session = getCurrentSession()
+        return session.get(Post::class.java, id) as? Post
+    }
+
     @PreAuthorize("hasRole('Admin') OR hasRole('User')")
     override fun create(post: Post?): Boolean {
         try{

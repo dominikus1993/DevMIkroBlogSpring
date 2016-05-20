@@ -6,6 +6,7 @@ module Services{
     import Result = Model.Result;
     export interface IPostService{
         getAll(callback: (data:Model.HttpData<Model.Post[]>) => void);
+        create(post : Model.Post, callback: (result : Model.Result<Model.Post>) => void)
     }
 
     export class PostService implements IPostService{
@@ -23,6 +24,10 @@ module Services{
             }).catch((error) => {
                 console.error(error);
             });
+        }
+
+        create(post : Model.Post, callback: (result : Model.Result<Model.Post>) => void){
+            
         }
     }
 }

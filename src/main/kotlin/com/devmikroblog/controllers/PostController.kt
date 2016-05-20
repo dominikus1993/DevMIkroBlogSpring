@@ -1,6 +1,7 @@
 package com.devmikroblog.controllers
 
 import com.devmikroblog.model.Post
+import com.devmikroblog.model.PostToCreation
 import com.devmikroblog.model.Result
 import com.devmikroblog.model.User
 import com.devmikroblog.services.interfaces.IPostService
@@ -37,7 +38,8 @@ class PostController : BaseController{
     }
 
     @RequestMapping(value = "create", method = arrayOf(RequestMethod.POST))
-    fun create(@RequestBody post:Post):Result<Post?>{
+    fun create(@RequestBody postToCreation:PostToCreation):Result<Post?>{
+        var post = PostToCreation.toPost(postToCreation)
         post.author = getUser().value as User
 
         val createResult = service.create(post);
