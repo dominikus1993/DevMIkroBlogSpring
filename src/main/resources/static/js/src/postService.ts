@@ -7,7 +7,7 @@ module Services{
     import Post = Model.Post;
     export interface IPostService{
         getAll(callback: (data:Model.HttpData<Model.Post[]>) => void);
-        create(post : Model.PostToCreation, callback: (result : Model.Result<Model.Post>) => void)
+        create(post : Model.PostToCreation, callback: (result : Model.HttpData<Model.Post>) => void)
     }
 
     export class PostService implements IPostService{
@@ -27,14 +27,14 @@ module Services{
             });
         }
 
-        create(post : Model.PostToCreation, callback: (result : Model.Result<Model.Post>) => void){
+        create(post : Model.PostToCreation, callback: (result : Model.HttpData<Model.Post>) => void){
             return this.http({
                 method : "POST",
                 headers: {"Content-Type": "application/json"},
                 url : Urls.createPost,
                 data : JSON.stringify(post),
 
-            }).then((res:Model.Result<Model.Post>) => {
+            }).then((res:Model.HttpData<Model.Post>) => {
                 callback(res)
             }).catch((error) => {
                 console.error(error);

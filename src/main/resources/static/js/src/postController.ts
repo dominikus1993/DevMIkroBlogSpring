@@ -23,8 +23,10 @@ module Controllers{
 
         public create(){
             if(this.postToCreation){
-                this.postService.create(this.postToCreation, (data) => {
-                    console.log(data);
+                this.postService.create(this.postToCreation, (data : Model.HttpData<Model.Post>) => {
+                    if(data.status == 200 && data.data.success){
+                        this.posts = [data.data.value].concat(this.posts);
+                    }
                 });
             }
         }
