@@ -2,6 +2,7 @@ package com.devmikroblog.controllers
 
 import com.devmikroblog.model.Post
 import com.devmikroblog.model.Result
+import com.devmikroblog.model.User
 import com.devmikroblog.services.interfaces.IPostService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.access.annotation.Secured
@@ -37,7 +38,10 @@ class PostController : BaseController{
 
     @RequestMapping(value = "create", method = arrayOf(RequestMethod.POST))
     fun create(@RequestBody post:Post):Result<Post?>{
+        post.author = getUser().value as User
+
         val createResult = service.create(post);
+
         if(createResult.isSuccess && createResult.value){
             return service.getBy(Predicate { x -> x.id == post.id })
         }
