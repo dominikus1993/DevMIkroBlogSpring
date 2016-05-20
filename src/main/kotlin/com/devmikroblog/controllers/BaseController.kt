@@ -1,6 +1,7 @@
 package com.devmikroblog.controllers
 
 import com.devmikroblog.model.Result
+import com.devmikroblog.model.User
 import com.devmikroblog.services.interfaces.IUserService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.core.context.SecurityContextHolder
@@ -17,9 +18,10 @@ open class BaseController{
         return userService.isOwner(postId, userId)
     }
 
-    protected fun getUser() : UserDetails?{
+    protected fun getUser() : Result<User?>{
         val auth = SecurityContextHolder.getContext().authentication
-        val user = auth.details as? UserDetails
+        val userDetails = auth.details as? UserDetails
+        val user = userService.getUserBuUserName(userDetails?.username)
         return user
     }
 }
