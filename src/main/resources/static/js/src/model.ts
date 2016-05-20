@@ -32,4 +32,7 @@ module Model{
         public comments: Post[];
     }
 
+    export class PostToCreation{
+        public message:string = ""
+    }
 }

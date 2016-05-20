@@ -45,16 +45,31 @@
     </div>
 </div>
 
-<div class="container body-content">
+<div class="container body-content" ng-controller="PostController as pc">
 
-    <!--<div ng-controller="NavigationController as navigation" class="container">-->
-    <!--<ul class="nav nav-pills" role="tablist">-->
-    <!--<li class="active"><a href="#/">Home</a></li>-->
-    <!--<li><a href="#/login">Login</a></li>-->
-    <!--<li ng-show="authenticated"><a href="" ng-click="logout()">logout</a></li>-->
-    <!--</ul>-->
-    <!--</div>-->
-    <div ng-controller="PostController as pc">
+    <link rel="stylesheet" href="http://fontawesome.io/assets/font-awesome/css/font-awesome.css">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="widget-area no-padding blank">
+                    <div class="status-upload">
+                        <form>
+                            <textarea placeholder="Dodaj wpis" ng-model="pc.postToCreation.message" required></textarea>
+                            <ul>
+                                <li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Audio"><i class="fa fa-music"></i></a></li>
+                                <li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Video"><i class="fa fa-video-camera"></i></a></li>
+                                <li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Sound Record"><i class="fa fa-microphone"></i></a></li>
+                                <li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Picture"><i class="fa fa-picture-o"></i></a></li>
+                            </ul>
+                            <button type="submit" class="btn btn-success green" ng-click="pc.create()"><i class="fa fa-share"></i> Dodaj</button>
+                        </form>
+                    </div><!-- Status Upload  -->
+                </div><!-- Widget Area -->
+            </div>
+
+        </div>
+    </div>
+    <div>
         <link rel="stylesheet" type="text/css"
               href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
         <div class="container" ng-repeat="post in pc.posts">
