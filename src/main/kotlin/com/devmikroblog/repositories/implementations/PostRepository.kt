@@ -38,7 +38,6 @@ open class PostRepository : BaseRepository, IPostRepository {
         return session.get(Post::class.java, id) as? Post
     }
 
-    @PreAuthorize("hasRole('Admin') OR hasRole('User')")
     override fun create(post: Post?): Boolean {
         try{
             getCurrentSession().save(post);
