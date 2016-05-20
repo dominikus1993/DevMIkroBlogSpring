@@ -29,6 +29,10 @@ public class UserService : IUserService, UserDetailsService {
         return userRepository.getUserByUsername(username as String)
     }
 
+    override fun getUserBuUserName(username: String?): Result<User?> {
+        return Result.ErrorWhenNoData(userRepository.getUserByUsername(username as String))
+    }
+
     override fun login(username: String, password: String): Result<User?> {
         return Result.ErrorWhenNoData(userRepository.login(username, password))
     }

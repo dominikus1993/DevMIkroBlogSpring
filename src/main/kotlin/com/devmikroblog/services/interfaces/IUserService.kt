@@ -4,6 +4,7 @@ import com.devmikroblog.model.Result
 import com.devmikroblog.model.Role
 import com.devmikroblog.model.User
 import com.devmikroblog.model.UserForCreating
+import org.springframework.security.core.userdetails.UserDetails
 
 /**
  * Created by dominik on 03.05.16.
@@ -14,4 +15,5 @@ interface IUserService {
     fun isAdmin(userId:Int):Result<Boolean>
     fun changeRole(userId: Int, role: Role): Result<Boolean>
     fun isOwner(postId: Int, userId: Int): Result<Boolean>
+    fun getUserBuUserName(username: String?): Result<User?>
 }
