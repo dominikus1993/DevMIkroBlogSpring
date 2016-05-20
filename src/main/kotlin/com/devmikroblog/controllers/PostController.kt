@@ -39,13 +39,13 @@ class PostController : BaseController{
 
     @RequestMapping(value = "create", method = arrayOf(RequestMethod.POST))
     fun create(@RequestBody postToCreation:PostToCreation):Result<Post?>{
-        var post = PostToCreation.toPost(postToCreation)
+        val post = PostToCreation.toPost(postToCreation)
         post.author = getUser().value as User
 
         val createResult = service.create(post);
 
         if(createResult.isSuccess && createResult.value){
-            return service.getBy(Predicate { x -> x.id == post.id })
+            return service.getById(post.id)
         }
         else{
             return Result.ErrorWhenNoData(null)

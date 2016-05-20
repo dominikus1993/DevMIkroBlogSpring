@@ -14,11 +14,17 @@ import java.util.function.Predicate
  */
 @Service
 class PostService : IPostService {
+
+
     private val postRepository:IPostRepository;
 
     @Autowired
     constructor(postRepository: IPostRepository) {
         this.postRepository = postRepository
+    }
+
+    override fun getById(id: Int): Result<Post?> {
+        return Result.ErrorWhenNoData(postRepository.getPostById(id))
     }
 
     override fun getPostsBy(predicate: Predicate<Post>): Result<List<Post>?> {
