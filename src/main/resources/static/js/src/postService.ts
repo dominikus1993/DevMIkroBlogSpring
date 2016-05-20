@@ -30,8 +30,9 @@ module Services{
         create(post : Model.PostToCreation, callback: (result : Model.Result<Model.Post>) => void){
             return this.http({
                 method : "POST",
+                headers: {"Content-Type": "application/json"},
                 url : Urls.createPost,
-                data : Post,
+                data : JSON.stringify(post)
             }).then((res:Model.Result<Model.Post>) => {
                 callback(res)
             }).catch((error) => {
