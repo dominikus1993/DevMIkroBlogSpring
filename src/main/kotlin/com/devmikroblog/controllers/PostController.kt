@@ -10,6 +10,7 @@ import org.springframework.security.access.annotation.Secured
 import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession
 import org.springframework.web.bind.annotation.*
+import java.security.Principal
 import java.util.function.Predicate
 
 /**
@@ -38,9 +39,9 @@ class PostController : BaseController{
     }
 
     @RequestMapping(value = "create", method = arrayOf(RequestMethod.POST))
-    fun create(@RequestBody postToCreation:PostToCreation):Result<Post?>{
+    fun create(@RequestBody postToCreation:PostToCreation, principal: Principal):Result<Post?>{
         val post = PostToCreation.toPost(postToCreation)
-        post.author = getUser().value as User
+        post.author = getUser(principal).value as User
 
         val createResult = service.create(post);
 

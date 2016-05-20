@@ -6,6 +6,7 @@ import com.devmikroblog.services.interfaces.IUserService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.core.userdetails.UserDetails
+import java.security.Principal
 
 /**
  * Created by dominik on 08.04.16.
@@ -18,10 +19,8 @@ open class BaseController{
         return userService.isOwner(postId, userId)
     }
 
-    protected fun getUser() : Result<User?>{
-        val auth = SecurityContextHolder.getContext().authentication
-        val userDetails = auth.details as? UserDetails
-        val user = userService.getUserBuUserName(userDetails?.username)
+    protected fun getUser(principal: Principal) : Result<User?>{
+        val user = userService.getUserBuUserName(principal.name)
         return user
     }
 }

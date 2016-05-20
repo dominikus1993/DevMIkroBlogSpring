@@ -20,8 +20,8 @@ import java.security.Principal
 class IdentityController : BaseController() {
 
     @RequestMapping(method = arrayOf(RequestMethod.GET), value = "getLoggedUser")
-    fun user():Result<User?>{
-        return getUser();
+    fun user(principal: Principal):Result<User?>{
+        return getUser(principal);
     }
 
     @RequestMapping(method = arrayOf(RequestMethod.POST), value = "register")

@@ -32,7 +32,8 @@ module Services{
                 method : "POST",
                 headers: {"Content-Type": "application/json"},
                 url : Urls.createPost,
-                data : JSON.stringify(post)
+                data : JSON.stringify(post),
+
             }).then((res:Model.Result<Model.Post>) => {
                 callback(res)
             }).catch((error) => {
