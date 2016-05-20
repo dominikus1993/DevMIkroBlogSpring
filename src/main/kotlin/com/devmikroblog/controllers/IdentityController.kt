@@ -1,6 +1,7 @@
 package com.devmikroblog.controllers
 
 import com.devmikroblog.model.Result
+import com.devmikroblog.model.User
 import com.devmikroblog.model.UserForCreating
 import com.devmikroblog.services.interfaces.IUserService
 import org.springframework.beans.factory.annotation.Autowired
@@ -18,10 +19,11 @@ import java.security.Principal
 @RequestMapping("/api/auth")
 class IdentityController : BaseController() {
 
-
-    fun user(user:Principal):Principal{
-        return user;
+    @RequestMapping(method = arrayOf(RequestMethod.GET), value = "getLoggedUser")
+    fun user():Result<User?>{
+        return getUser();
     }
+
     @RequestMapping(method = arrayOf(RequestMethod.POST), value = "register")
     fun register(@RequestBody user:UserForCreating) : Result<Boolean> {
         return userService.register(user)
