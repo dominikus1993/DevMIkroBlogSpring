@@ -7,12 +7,21 @@ module Controllers{
     export class PostController{
 
         public posts: Model.Post[];
+        public post : Model.Post;
         public postToCreation: Model.PostToCreation;
         public loggedUser:Model.User;
 
         constructor(private rootSocpe:ng.IRootElementService, private scope:ng.IScope, private postService:IPostService, private userService : Services.IUserService){
             this.getLoggedUser();
             this.getAll();
+        }
+
+        public getById(postId){
+            this.postService.getById(postId, (res:Model.HttpData<Model.Post>) => {
+                if(res.status == 200 && res.data.success){
+                    this.post = res.data.value;
+                }
+            })
         }
 
         public getLoggedUser(){

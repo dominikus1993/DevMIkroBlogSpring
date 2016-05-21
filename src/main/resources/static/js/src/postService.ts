@@ -9,6 +9,7 @@ module Services{
         getAll(callback: (data:Model.HttpData<Model.Post[]>) => void);
         create(post : Model.PostToCreation, callback: (result : Model.HttpData<Model.Post>) => void);
         deletePost(postId: number, callback: (result : Model.HttpData<boolean>) => void);
+        getById(postId:number, callback : (data : Model.HttpData<Model.Post>) => void);
     }
 
     export class PostService implements IPostService{
@@ -24,6 +25,15 @@ module Services{
                 callback(res);
                 return res;
             }).catch((error) => {
+                console.error(error);
+            });
+        }
+
+        getById(postId:number, callback : (data : Model.HttpData<Model.Post>) => void){
+            return this.http.get(Urls.getPostById(postId)).then((res : Model.HttpData<Model.Post>) => {
+                callback(res);
+                return res;
+            }).catch(error => {
                 console.error(error);
             });
         }
