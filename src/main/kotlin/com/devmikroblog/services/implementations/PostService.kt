@@ -47,8 +47,12 @@ class PostService : IPostService {
         return Result.ErrorWhenNoData(queryResult, listOf("Bad data"))
     }
 
-    override fun update(post: Post, userId: Int): Result<Boolean> {
-        return action(post, userId, Function { x -> postRepository.update(x) })
+    override fun update(post: Post, user: User): Result<Boolean> {
+        val postFromDb = getById(post.id)
+        if(postFromDb.isSuccess && postFromDb.value?.author?.id == user.id){
+            return Result(postRepository.update(post))
+        }
+        return Result(false)
     }
 
     override fun delete(postId: Int, user: User): Result<Boolean> {

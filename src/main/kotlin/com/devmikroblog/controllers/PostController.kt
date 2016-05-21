@@ -1,9 +1,6 @@
 package com.devmikroblog.controllers
 
-import com.devmikroblog.model.Post
-import com.devmikroblog.model.PostToCreation
-import com.devmikroblog.model.Result
-import com.devmikroblog.model.User
+import com.devmikroblog.model.*
 import com.devmikroblog.services.interfaces.IPostService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.access.annotation.Secured
@@ -58,6 +55,16 @@ class PostController : BaseController{
         val user = getUser(principal)
         if (user.isSuccess){
             return service.delete(postId, user.value as User)
+        }
+        return Result(false)
+    }
+
+    @RequestMapping(value = "update", method = arrayOf(RequestMethod.PUT))
+    fun update(@RequestBody postToUpdate: PostToUpdate, principal: Principal): Result<Boolean>{
+        val user = getUser(principal)
+        if (user.isSuccess){
+            val post = PostToUpdate.toPost(postToUpdate)
+            return service.update(post, user.value as User)
         }
         return Result(false)
     }

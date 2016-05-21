@@ -16,6 +16,6 @@ interface IPostService {
     fun getPostsBy(predicate: Predicate<Post>): Result<List<Post>?>
     fun getById(id:Int):Result<Post?>
     fun create(post: Post):Result<Boolean>
-    fun update(post: Post, userId: Int):Result<Boolean>
+    fun update(post: Post, user: User):Result<Boolean>
     fun delete(postId: Int, user: User): Result<Boolean>
 }
