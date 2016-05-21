@@ -52,4 +52,13 @@ class PostController : BaseController{
             return Result.ErrorWhenNoData(null)
         }
     }
+
+    @RequestMapping(value = "delete", method = arrayOf(RequestMethod.DELETE))
+    fun delete(@PathVariable postId:Int, principal: Principal): Result<Boolean>{
+        val user = getUser(principal)
+        if (user.isSuccess){
+            return service.delete(postId, user.value as User)
+        }
+        return Result(false)
+    }
 }

@@ -2,6 +2,7 @@ package com.devmikroblog.services.implementations
 
 import com.devmikroblog.model.Post
 import com.devmikroblog.model.Result
+import com.devmikroblog.model.User
 import com.devmikroblog.repositories.interfaces.IPostRepository
 import com.devmikroblog.services.interfaces.IPostService
 import org.springframework.beans.factory.annotation.Autowired
@@ -50,8 +51,12 @@ class PostService : IPostService {
         return action(post, userId, Function { x -> postRepository.update(x) })
     }
 
-    override fun delete(post: Post, userId: Int): Result<Boolean> {
-        return action(post, userId, Function { x -> postRepository.delete(x) })
+    override fun delete(postId: Int, user: User): Result<Boolean> {
+        val post = getById(postId)
+        if(post.isSuccess && post.value?.author?.id == user.id){
+            return Result(postRepository.delete(post.value))
+        }
+        return Result(false)
     }
 
     private fun action(post: Post, userId: Int, function: Function<Post, Boolean>): Result<Boolean> {

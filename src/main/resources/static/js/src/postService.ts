@@ -7,7 +7,8 @@ module Services{
     import Post = Model.Post;
     export interface IPostService{
         getAll(callback: (data:Model.HttpData<Model.Post[]>) => void);
-        create(post : Model.PostToCreation, callback: (result : Model.HttpData<Model.Post>) => void)
+        create(post : Model.PostToCreation, callback: (result : Model.HttpData<Model.Post>) => void);
+        deletePost(postId: number, callback: (result : Model.HttpData<boolean>) => void);
     }
 
     export class PostService implements IPostService{
@@ -37,6 +38,17 @@ module Services{
             }).then((res:Model.HttpData<Model.Post>) => {
                 callback(res)
             }).catch((error) => {
+                console.error(error);
+            })
+        }
+
+        deletePost(postId: number, callback: (result : Model.HttpData<boolean>) => void){
+            return this.http({
+                method : "DELETE",
+                url: Urls.deletePost(postId),
+            }).then((res : Model.HttpData<boolean>) => {
+                callback(res)
+            }).catch(error => {
                 console.error(error);
             })
         }

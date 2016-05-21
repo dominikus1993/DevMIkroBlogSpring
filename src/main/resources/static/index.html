@@ -99,11 +99,11 @@
                             <!--<a href="#!/Post/{{post.Id}}" class="btn btn-default stat-item">-->
                             <!--<i class="fa fa-share icon"></i>Wejdź-->
                             <!--</a>-->
-                            <!--<a href="" onclick="confirm('Napewno chcesz usunąć swój cenny wpis?')"-->
-                            <!--ng-click="pc.delete(post.Id)" ng-show="pc.isOwner(post.AuthorName)"-->
-                            <!--class="btn btn-default stat-item">-->
-                            <!--<i class="glyphicon glyphicon-remove icon"></i>Usuń-->
-                            <!--</a>-->
+                            <a href="" onclick="confirm('Napewno chcesz usunąć swój cenny wpis?')"
+                            ng-click="pc.delete(post.Id)" ng-show="pc.isOwner(post.AuthorName)"
+                            class="btn btn-default stat-item">
+                            <i class="glyphicon glyphicon-remove icon"></i>Usuń
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -118,6 +118,7 @@
     </footer>
 
 </div>
+<script type="text/javascript" src="bower_components/underscore/underscore.js"></script>
 <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
 <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
 <script type="text/javascript" src="bower_components/angular/angular.js"></script>

@@ -30,5 +30,13 @@ module Controllers{
                 });
             }
         }
+
+        public deletePost(postId : number){
+            this.postService.deletePost(postId, result => {
+                if (result.status === 200 && result.data.success) {
+                    this.posts = _.without<Model.Post>(this.posts, this.posts.filter(x => x.id === postId)[0]);
+                }
+            });
+        }
     }
 }

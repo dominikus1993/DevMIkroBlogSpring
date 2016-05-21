@@ -2,6 +2,7 @@ package com.devmikroblog.services.interfaces
 
 import com.devmikroblog.model.Post
 import com.devmikroblog.model.Result
+import com.devmikroblog.model.User
 import org.hibernate.sql.Update
 import org.springframework.stereotype.Service
 import java.util.function.Predicate
@@ -16,5 +17,5 @@ interface IPostService {
     fun getById(id:Int):Result<Post?>
     fun create(post: Post):Result<Boolean>
     fun update(post: Post, userId: Int):Result<Boolean>
-    fun delete(post: Post, userId: Int): Result<Boolean>
+    fun delete(postId: Int, user: User): Result<Boolean>
 }
