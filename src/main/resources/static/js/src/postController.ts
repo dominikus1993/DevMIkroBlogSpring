@@ -9,11 +9,24 @@ module Controllers{
         public posts: Model.Post[];
         public post : Model.Post;
         public postToCreation: Model.PostToCreation;
+        public postToUpdate:Model.PostToUpdate;
         public loggedUser:Model.User;
 
-        constructor(private rootSocpe:ng.IRootElementService, private scope:ng.IScope, private postService:IPostService, private userService : Services.IUserService){
+
+        constructor(private rootSocpe:ng.IRootElementService, private scope:ng.IScope, private postService:IPostService, private userService : Services.IUserService, postMode : Model.PostMode, postId ?: number){
             this.getLoggedUser();
-            this.getAll();
+            this.resolvePostMode(postMode, postId)
+        }
+
+        public resolvePostMode(postMode: Model.PostMode, postId ?: number){
+            switch (postMode){
+                case Model.PostMode.AllPost:
+                    this.getAll();
+                    break;
+                case Model.PostMode.PostById:
+                    this.getById(postId);
+                    break;
+            }
         }
 
         public getById(postId){

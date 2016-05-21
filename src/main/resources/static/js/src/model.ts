@@ -35,4 +35,14 @@ module Model{
     export class PostToCreation{
         public message:string = ""
     }
+
+    export class PostToUpdate{
+        public id:number = 0;
+        public message:string = "";
+    }
+
+    export enum PostMode{
+        AllPost,
+        PostById
+    }
 }
