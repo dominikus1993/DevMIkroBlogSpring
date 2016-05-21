@@ -10,7 +10,7 @@ var watch = require("gulp-watch");
 var ts = require('gulp-typescript');
 var notify = require('gulp-notify');
 
-var tsFiles = ["typings/main/**/*.ts", "src/**/*.ts"];
+var tsFiles = ["src/**/*.ts"];
 var jsFiles = ["src/**/*.js", "!node_modules/**/*.js"];
 var compilation = ts({
     target: 'es6',
