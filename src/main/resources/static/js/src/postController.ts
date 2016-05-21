@@ -79,9 +79,9 @@ module Controllers{
         }
 
         public edit(){
-            this.postService.update(this.postToUpdate, (result: Model.HttpData<boolean>) => {
-                if (result.status == 200 && result.data.success && result.data.value) {
-                    this.post.message = this.postToUpdate.message;
+            this.postService.update(this.postToUpdate, (result: Model.Result<boolean>) => {
+                if (result.success && result.value) {
+                    this.getById(this.postToUpdate.id);
                 }
             });
 

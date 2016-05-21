@@ -2,6 +2,7 @@ package com.devmikroblog.services.implementations
 
 import com.devmikroblog.model.Post
 import com.devmikroblog.model.Result
+import com.devmikroblog.model.Role
 import com.devmikroblog.model.User
 import com.devmikroblog.repositories.interfaces.IPostRepository
 import com.devmikroblog.services.interfaces.IPostService
@@ -49,7 +50,12 @@ class PostService : IPostService {
 
     override fun update(post: Post, user: User): Result<Boolean> {
         val postFromDb = getById(post.id)
-        if(postFromDb.isSuccess && postFromDb.value?.author?.id == user.id){
+        if(postFromDb.isSuccess && isOwnerOrAdmin(postFromDb.value as Post, user)){
+            post.author = postFromDb.value.author;
+            post.rate = postFromDb.value.rate;
+            post.comments = postFromDb.value.comments;
+            post.tags = postFromDb.value.tags;
+            post.votes = postFromDb.value.votes;
             return Result(postRepository.update(post))
         }
         return Result(false)
@@ -57,7 +63,7 @@ class PostService : IPostService {
 
     override fun delete(postId: Int, user: User): Result<Boolean> {
         val post = getById(postId)
-        if(post.isSuccess && post.value?.author?.id == user.id){
+        if(post.isSuccess && isOwnerOrAdmin(post.value as Post, user)){
             return Result(postRepository.delete(post.value))
         }
         return Result(false)
@@ -73,5 +79,9 @@ class PostService : IPostService {
             return Result(queryResult, listOf("Update error"))
         }
         return Result(false)
+    }
+
+    private fun isOwnerOrAdmin(post: Post, user: User):Boolean{
+        return (post.author.id == user.id || user.role == Role.ADMIN)
     }
 }

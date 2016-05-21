@@ -10,7 +10,7 @@ module Services{
         create(post : Model.PostToCreation, callback: (result : Model.HttpData<Model.Post>) => void);
         deletePost(postId: number, callback: (result : Model.HttpData<boolean>) => void);
         getById(postId:number, callback : (data : Model.HttpData<Model.Post>) => void);
-        update(postToUpdate: Model.PostToUpdate, callback: (result: Model.HttpData<boolean>) => void);
+        update(postToUpdate: Model.PostToUpdate, callback: (result: Model.Result<boolean>) => void);
     }
 
     export class PostService implements IPostService{
@@ -64,9 +64,9 @@ module Services{
             })
         }
 
-        update(postToUpdate: Model.PostToUpdate, callback: (result: Model.HttpData<boolean>) => void){
+        update(postToUpdate: Model.PostToUpdate, callback: (result: Model.Result<boolean>) => void){
             return this.http.put(Urls.updatePost, postToUpdate)
-                .success((data: Model.HttpData<boolean>) => {
+                .success((data: Model.Result<boolean>) => {
                     console.log(data);
                     callback(data);
                 }).error(error => {
