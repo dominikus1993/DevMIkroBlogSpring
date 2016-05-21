@@ -14,9 +14,9 @@ module Controllers{
         public loggedUser:Model.User;
 
 
-        constructor(private rootSocpe:ng.IRootElementService, private scope:ng.IScope, private postService:IPostService, private userService : Services.IUserService, postMode : Model.PostMode, postId ?: number){
+        constructor(private scope:ng.IScope, private postService:IPostService, private userService : Services.IUserService, postMode : Model.PostMode, postId ?: number){
             this.getLoggedUser();
-            this.getAll();
+            this.resolvePostMode(postMode, postId)
         }
 
         public resolvePostMode(postMode: Model.PostMode, postId ?: number){
@@ -41,6 +41,7 @@ module Controllers{
         public isEdited() {
             this.postToUpdate = new Model.PostToUpdate(this.post.id,  this.post.message);
             this.toUpdate = !this.toUpdate;
+            console.log(this.toUpdate)
         }
 
         public getLoggedUser(){

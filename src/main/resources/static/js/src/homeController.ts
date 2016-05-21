@@ -3,7 +3,7 @@
 module Controllers{
     export class HomeController{
 
-        constructor(private rootScope:ng.IRootScopeService, private scope:ng.IScope){
+        constructor(private scope:ng.IScope){
 
         }
 

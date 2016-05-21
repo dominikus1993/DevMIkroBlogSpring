@@ -23,10 +23,9 @@
             <ul class="nav navbar-nav">
                 <li><a href="#!/">Home</a></li>
                 <li><a href="#!/Tag/javascript">Javascript</a></li>
-                <li>@Html.ActionLink("API", "Index", "Help", new {area = ""}, null)</li>
             </ul>
             <ul class="nav navbar-nav navbar-right" id="logOff">
-                <li style="color: white;" ng-show="$root.isLogged"><a href="#">Witaj! <i>{{account.userName}}</i></a>
+                <li style="color: white;"><a href="#">Witaj! <i>Dominik</i></a>
                 </li>
                 <li>
                     <button class="btn btn-primary" ng-click="account.logout()" ng-show="$root.isLogged">Wyloguj się
@@ -62,8 +61,6 @@
 <script type="text/javascript" src="bower_components/angular/angular.js"></script>
 <script type="text/javascript" src="bower_components/angular-route/angular-route.js"></script>
 <script type="text/javascript" src="bower_components/angular-cookies/angular-cookies.js"></script>
-<script type="text/javascript" src="js/src/main.js"></script>
-<script type="text/javascript" src="js/src/route.js"></script>
 <script type="text/javascript" src="js/src/urls.js"></script>
 <script type="text/javascript" src="js/src/model.js"></script>
 <script type="text/javascript" src="js/src/userService.js"></script>
@@ -71,5 +68,7 @@
 <script type="text/javascript" src="js/src/userController.js"></script>
 <script type="text/javascript" src="js/src/homeController.js"></script>
 <script type="text/javascript" src="js/src/postController.js"></script>
+<script type="text/javascript" src="js/src/route.js"></script>
+<script type="text/javascript" src="js/src/main.js"></script>
 </body>
 </html>

@@ -7,14 +7,17 @@
 ///<reference path="route.ts"/>
 
 
-const appModule = angular.module("devmikroblog", ['ngCookies', 'ngRoute']);
+const appModule = angular.module("devmikroblog", ["ngRoute"])
+    .config(($routeProvider:angular.route.IRouteProvider) => {
+        $routeProvider.when("/", {templateUrl: "/all.html"})
+            .when("/Post/:postId", { templateUrl: "/post.html"})
+            .otherwise({redirectTo: "/"});
+    })
+    .factory("PostService", ["$http", ($http) => new Services.PostService($http)])
+    .factory("UserService", ["$http", ($http) => new Services.UserService($http)])
+    .controller("PostController", ["$scope", "PostService", "UserService", ($scope, postService, userService) => new Controllers.PostController($scope, postService, userService, Model.PostMode.AllPost)])
+    .controller("PostByIdController", ["$routeParams", "$scope", "PostService", "UserService", ($routeParams, $scope, postService, userService) => new Controllers.PostController($scope, postService, userService, Model.PostMode.PostById, $routeParams.postId)])
+    .controller("UserController", ["$scope", "UserService", ($scope, userService) => new Controllers.UserController($scope, userService)]);
 
-appModule.controller("HomeController", ["$rootScope", "$scope", ($rootScope, $scope) => new Controllers.HomeController($rootScope, $scope)]);
-appModule.controller("PostController", ["$rootScope", "$scope", "PostService", "UserService", ($rootScope, $scope, postService, userService) => new Controllers.PostController($rootScope, $scope, postService, userService, Model.PostMode.AllPost)]);
-appModule.controller("PostByIdController", ["$rootScope", "$scope", "PostService", "UserService", "$routeParams", ($rootScope, $scope, postService, userService, $routeParams) => new Controllers.PostController($rootScope, $scope, postService, userService, Model.PostMode.PostById, $routeParams.postId)]);
-appModule.controller("UserController", ["$rootScope", "$scope", "UserService", ($rootScope, $scope, userService) => new Controllers.UserController($rootScope, $scope, userService)]);
 
-appModule.factory("PostService", ($http) => new Services.PostService($http));
-appModule.factory("UserService", ($http) => new Services.UserService($http));
 
-appModule.config(["$routeProvider", "$locationProvider", ($routeProvider, $locationProvider) => Routing.get($locationProvider, $routeProvider)]);
