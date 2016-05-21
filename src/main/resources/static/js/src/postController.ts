@@ -1,5 +1,6 @@
 ///<reference path="tsd.d.ts"/>
 ///<reference path="postService.ts"/>
+///<reference path="userService.ts"/>
 
 module Controllers{
     import IPostService = Services.IPostService;
@@ -7,9 +8,15 @@ module Controllers{
 
         public posts: Model.Post[];
         public postToCreation: Model.PostToCreation;
+        public loggedUser:Model.User;
 
-        constructor(private rootSocpe:ng.IRootElementService, private scope:ng.IScope, private postService:IPostService){
+        constructor(private rootSocpe:ng.IRootElementService, private scope:ng.IScope, private postService:IPostService, private userService : Services.IUserService){
             this.getAll();
+            this.userService.getLoggedUser((res) => {
+                if(res.status == 200 && res.data.success) {
+                    this.loggedUser = res.data.value;
+                }
+            });
         }
 
         public getAll(){
@@ -29,6 +36,10 @@ module Controllers{
                     }
                 });
             }
+        }
+
+        public isOwner(userId : number){
+
         }
 
         public deletePost(postId : number){
