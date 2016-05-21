@@ -71,15 +71,15 @@ open class UserRepository : BaseRepository, IUserRepository {
     }
 
 
-    override fun create(post: User?): Boolean {
+    override fun create(entity: User?): Boolean {
         throw UnsupportedOperationException()
     }
 
-    override fun update(post: User?): Boolean {
+    override fun update(entity: User?): Boolean {
         throw UnsupportedOperationException()
     }
 
-    override fun delete(post: User?): Boolean {
+    override fun delete(entity: User?): Boolean {
         throw UnsupportedOperationException()
     }
 

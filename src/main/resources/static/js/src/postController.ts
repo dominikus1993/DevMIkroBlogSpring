@@ -11,7 +11,11 @@ module Controllers{
         public loggedUser:Model.User;
 
         constructor(private rootSocpe:ng.IRootElementService, private scope:ng.IScope, private postService:IPostService, private userService : Services.IUserService){
+            this.getLoggedUser();
             this.getAll();
+        }
+
+        public getLoggedUser(){
             this.userService.getLoggedUser((res) => {
                 if(res.status == 200 && res.data.success) {
                     this.loggedUser = res.data.value;
@@ -39,7 +43,10 @@ module Controllers{
         }
 
         public isOwner(userId : number){
-
+            if(this.loggedUser){
+                return userId == this.loggedUser.id || this.loggedUser.role == "ADMIN";
+            }
+            return false;
         }
 
         public deletePost(postId : number){
