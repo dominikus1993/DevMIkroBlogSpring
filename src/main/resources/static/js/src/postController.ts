@@ -16,7 +16,7 @@ module Controllers{
 
         constructor(private rootSocpe:ng.IRootElementService, private scope:ng.IScope, private postService:IPostService, private userService : Services.IUserService, postMode : Model.PostMode, postId ?: number){
             this.getLoggedUser();
-            this.resolvePostMode(postMode, postId)
+            this.getAll();
         }
 
         public resolvePostMode(postMode: Model.PostMode, postId ?: number){
@@ -75,6 +75,10 @@ module Controllers{
                 return userId == this.loggedUser.id || this.loggedUser.role == "ADMIN";
             }
             return false;
+        }
+
+        public edit(){
+
         }
 
         public deletePost(postId : number){
