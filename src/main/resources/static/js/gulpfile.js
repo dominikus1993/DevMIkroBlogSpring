@@ -7,12 +7,12 @@
 var gulp = require("gulp");
 var babel = require("gulp-babel");
 var watch = require("gulp-watch");
-var tsb = require('gulp-tsb');
+var ts = require('gulp-typescript');
 var notify = require('gulp-notify');
 
 var tsFiles = ["typings/main/**/*.ts", "src/**/*.ts"];
 var jsFiles = ["src/**/*.js", "!node_modules/**/*.js"];
-var compilation = tsb.create({
+var compilation = ts({
     target: 'es6',
     module: 'commonjs',
     declaration: false,
@@ -23,7 +23,7 @@ var compilation = tsb.create({
 });
 
 gulp.task("build", function () {
-    return gulp.src(tsFiles).pipe(compilation()).pipe(gulp.dest(function (file) {
+    return gulp.src(tsFiles).pipe(compilation).pipe(gulp.dest(function (file) {
         return file.base;
     })).pipe(notify({
         title: 'DONE COMPILATION TYPESCRIPT',
