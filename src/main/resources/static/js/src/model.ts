@@ -39,6 +39,11 @@ module Model{
     export class PostToUpdate{
         public id:number = 0;
         public message:string = "";
+
+        constructor(id?: number, message?: string) {
+            this.id = id;
+            this.message = message;
+        }
     }
 
     export enum PostMode{

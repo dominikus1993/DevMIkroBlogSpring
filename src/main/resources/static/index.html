@@ -96,9 +96,9 @@
                             <!--ng-disabled="(pc.userVotedUp(post.Id) || !$root.isLogged)">-->
                             <!--<i class="fa fa-thumbs-up icon"></i>{{post.Rate}}-->
                             <!--</a>-->
-                            <!--<a href="#!/Post/{{post.Id}}" class="btn btn-default stat-item">-->
-                            <!--<i class="fa fa-share icon"></i>Wejdź-->
-                            <!--</a>-->
+                            <a href="#!/Post/{{post.Id}}" class="btn btn-default stat-item">
+                            <i class="fa fa-share icon"></i>Wejdź
+                            </a>
                             <a href="" onclick="confirm('Napewno chcesz usunąć swój cenny wpis?')"
                             ng-click="pc.deletePost(post.id)" ng-show="pc.isOwner(post.author.id)"
                             class="btn btn-default stat-item">

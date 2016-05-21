@@ -10,6 +10,7 @@ module Controllers{
         public post : Model.Post;
         public postToCreation: Model.PostToCreation;
         public postToUpdate:Model.PostToUpdate;
+        public toUpdate = false;
         public loggedUser:Model.User;
 
 
@@ -35,6 +36,11 @@ module Controllers{
                     this.post = res.data.value;
                 }
             })
+        }
+
+        public isEdited() {
+            this.postToUpdate = new Model.PostToUpdate(this.post.id,  this.post.message);
+            this.toUpdate = !this.toUpdate;
         }
 
         public getLoggedUser(){
