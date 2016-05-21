@@ -44,7 +44,7 @@ class Post():Serializable{
 
     var author:User = User()
         @NotNull
-        @ManyToOne
+        @ManyToOne( cascade = arrayOf(CascadeType.ALL))
         @JsonProperty(access = JsonProperty.Access.READ_ONLY)
         get
         set

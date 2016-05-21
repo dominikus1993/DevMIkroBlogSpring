@@ -16,10 +16,10 @@ class PostToUpdate{
         get
         set
     companion object{
-        fun toPost(postToCreation: PostToUpdate):Post{
+        fun toPost(postToUpdate: PostToUpdate):Post{
             val post = Post()
-            post.id = post.id;
-            post.message = postToCreation.message
+            post.id = postToUpdate.id;
+            post.message = postToUpdate.message
             return post
         }
     }
