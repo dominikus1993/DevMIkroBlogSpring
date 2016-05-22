@@ -1,13 +1,16 @@
 package com.devmikroblog.model
 
+import com.fasterxml.jackson.annotation.JsonFormat
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
 import org.hibernate.annotations.LazyCollection
 import org.hibernate.annotations.LazyCollectionOption
+import org.springframework.format.annotation.DateTimeFormat
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.AuthorityUtils
 import org.springframework.security.core.userdetails.UserDetails
 import java.io.Serializable
+import java.util.*
 import javax.persistence.*
 import javax.validation.constraints.NotNull
 
@@ -49,13 +52,14 @@ public class User(): UserDetails, Serializable{
     @JsonIgnore
     override fun isEnabled(): Boolean = activated
 
-    constructor(id:Int, login:String, userPassword:String, posts:Set<Post>, role: Role, persistentTokens:Set<Token>) : this(){
+    constructor(id:Int, login:String, userPassword:String, posts:Set<Post>, creationDate : Date, role: Role, persistentTokens:Set<Token>) : this(){
         this.id = id;
         this.login = login;
         this.userPassword = userPassword;
         this.posts = posts;
         this.role = role;
         this.persistentTokens = persistentTokens;
+        this.creationDate = creationDate;
     }
 
     var id:Int = 0
@@ -89,6 +93,14 @@ public class User(): UserDetails, Serializable{
         @OneToMany(cascade = arrayOf(CascadeType.ALL))
         @LazyCollection(LazyCollectionOption.TRUE)
         @JsonIgnore
+        get
+        set
+
+    var creationDate: Date = Date()
+        @NotNull
+        @DateTimeFormat(pattern = "HH:mm dd-MM-yyyy")
+        @JsonFormat(pattern = "HH:mm dd-MM-yyyy")
+        @JsonProperty(access = JsonProperty.Access.READ_ONLY)
         get
         set
 

@@ -4,6 +4,7 @@
 
 module Controllers{
     import IPostService = Services.IPostService;
+    import PostToCreation = Model.PostToCreation;
     export class PostController{
 
         public posts: Model.Post[];
@@ -66,6 +67,7 @@ module Controllers{
                 this.postService.create(this.postToCreation, (data : Model.HttpData<Model.Post>) => {
                     if(data.status == 200 && data.data.success){
                         this.posts = [data.data.value].concat(this.posts);
+                        this.postToCreation = new PostToCreation();
                     }
                 });
             }

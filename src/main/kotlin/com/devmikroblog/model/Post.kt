@@ -1,9 +1,12 @@
 package com.devmikroblog.model
 
+import com.fasterxml.jackson.annotation.JsonFormat
 import com.fasterxml.jackson.annotation.JsonProperty
 import org.hibernate.annotations.LazyCollection
 import org.hibernate.annotations.LazyCollectionOption
+import org.springframework.format.annotation.DateTimeFormat
 import java.io.Serializable
+import java.util.*
 import javax.persistence.*
 import javax.validation.constraints.NotNull
 
@@ -14,13 +17,14 @@ import javax.validation.constraints.NotNull
 @Table(name = "Posts")
 class Post():Serializable{
 
-    constructor(id:Int, message:String, rate: Int, author:User, comments:Set<Post>, tags:Set<Tag>) : this(){
+    constructor(id:Int, message:String, rate: Int, author:User, creationDate: Date, comments:Set<Post>, tags:Set<Tag>) : this(){
         this.id = id;
         this.message = message;
         this.rate = rate;
         this.author = author;
         this.comments = comments;
         this.tags = tags;
+        this.creationDate = creationDate;
     }
 
     var id:Int = 0
@@ -36,6 +40,14 @@ class Post():Serializable{
         get
         set
 
+    var creationDate: Date = Date()
+        @NotNull
+        @DateTimeFormat(pattern = "HH:mm dd-MM-yyyy")
+        @JsonFormat(pattern = "HH:mm dd-MM-yyyy")
+        @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+        get
+        set
+
     var rate:Int = 0
         @Column
         @JsonProperty(access = JsonProperty.Access.READ_ONLY)
@@ -44,7 +56,7 @@ class Post():Serializable{
 
     var author:User = User()
         @NotNull
-        @ManyToOne( cascade = arrayOf(CascadeType.ALL))
+        @ManyToOne
         @JsonProperty(access = JsonProperty.Access.READ_ONLY)
         get
         set

@@ -22,6 +22,7 @@ module Model{
         public id:number = 0;
         public login:string = "";
         public activated:boolean = false;
+        public creationDate:Date;
         public role: "USER" | "ADMIN"
     }
 
@@ -29,6 +30,7 @@ module Model{
         public id: number = 0;
         public message: string = "";
         public rate: number = 0;
+        public creationDate:Date;
         public author:User;
         public comments: Post[];
     }

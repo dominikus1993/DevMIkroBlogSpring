@@ -14,41 +14,41 @@ import org.junit.Test
  */
 class PostServiceTest {
 
-    private val postService: IPostService = PostService(PostServiceMocks.getIPostRepositoryMock());
-
-    @Test
-    fun testGetAll() {
-        val testResult = postService.getAll();
-        assertTrue(testResult.isSuccess)
-        assertThat(testResult.value, `is`(not(emptyList())))
-
-    }
-
-    @Test
-    fun testGetById() {
-        val testResult = postService.getBy (PostServiceMocks.predicateById)
-        assertTrue(testResult.isSuccess)
-        assertNotNull(testResult.value)
-    }
-
-    @Test
-    fun testGetByAuthorLogin() {
-        val testResult = postService.getBy (PostServiceMocks.predicateByAuthorLogin)
-        assertTrue(testResult.isSuccess)
-        assertNotNull(testResult.value)
-    }
-
-    @Test
-    fun testCreate() {
-        val testResult = postService.create(Post())
-        assertTrue(testResult.isSuccess)
-        assertTrue(testResult.value)
-    }
-
-    @Test
-    fun testGetPostsByAuthor() {
-        val testResult = postService.getPostsBy (PostServiceMocks.predicateByAuthorLogin)
-        assertTrue(testResult.isSuccess)
-        assertNotNull(testResult.value)
-    }
+//    private val postService: IPostService = PostService(PostServiceMocks.getIPostRepositoryMock());
+//
+//    @Test
+//    fun testGetAll() {
+//        val testResult = postService.getAll();
+//        assertTrue(testResult.isSuccess)
+//        assertThat(testResult.value, `is`(not(emptyList())))
+//
+//    }
+//
+//    @Test
+//    fun testGetById() {
+//        val testResult = postService.getBy (PostServiceMocks.predicateById)
+//        assertTrue(testResult.isSuccess)
+//        assertNotNull(testResult.value)
+//    }
+//
+//    @Test
+//    fun testGetByAuthorLogin() {
+//        val testResult = postService.getBy (PostServiceMocks.predicateByAuthorLogin)
+//        assertTrue(testResult.isSuccess)
+//        assertNotNull(testResult.value)
+//    }
+//
+//    @Test
+//    fun testCreate() {
+//        val testResult = postService.create(Post())
+//        assertTrue(testResult.isSuccess)
+//        assertTrue(testResult.value)
+//    }
+//
+//    @Test
+//    fun testGetPostsByAuthor() {
+//        val testResult = postService.getPostsBy (PostServiceMocks.predicateByAuthorLogin)
+//        assertTrue(testResult.isSuccess)
+//        assertNotNull(testResult.value)
+//    }
 }

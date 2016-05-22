@@ -1,6 +1,7 @@
 package com.devmikroblog.model
 
 import com.fasterxml.jackson.annotation.JsonProperty
+import java.util.*
 
 /**
  * Created by domin_000 on 17.05.2016.
@@ -28,6 +29,7 @@ class UserForCreating{
             user.login = userForCreating.username
             user.role = Role.USER
             user.userPassword = userForCreating.password
+            user.creationDate = Date()
             return user
         }
     }

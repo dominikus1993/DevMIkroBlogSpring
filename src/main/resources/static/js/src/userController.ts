@@ -3,6 +3,7 @@
 
 module Controllers {
     import User = Model.User;
+    import getLoggedUser = Urls.getLoggedUser;
     export class UserController {
         public users:Model.User[];
         public loggedUser:Model.User;
@@ -12,10 +13,12 @@ module Controllers {
                 if(res.role == "ADMIN" || userMode == Model.UserMode.None){
                     this.resolve(userMode);
                 }else{
-                    alert("Nie masz uprawnień do przeglądania tej strony")
+                    alert("Nie masz uprawnień do przeglądania tej strony");
+                    location.href = "/"
                 }
             }).catch((error) => {
-                alert("Nie masz uprawnień do przeglądania tej strony")
+                alert("Nie masz uprawnień do przeglądania tej strony");
+                location.href = "/"
             });
 
         }
@@ -39,6 +42,21 @@ module Controllers {
                     this.users = res.data.value;
                 }
             });
+        }
+
+        public deleteUser(userId:number){
+            if(this.loggedUser.role == "ADMIN"){
+                this.userService.deleteUser(userId, result => {
+                    if (result.status === 200 && result.data.success) {
+                        this.users = _.without<Model.User>(this.users, this.users.filter(x => x.id === userId)[0]);
+                    }
+                });
+            }
+            else{
+                alert("Nie masz uprawnień do wykonania tej operacji");
+                location.href = "/";
+            }
+
         }
         
         public logout(){

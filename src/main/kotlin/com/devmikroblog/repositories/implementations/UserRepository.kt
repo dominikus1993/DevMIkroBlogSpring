@@ -87,7 +87,8 @@ open class UserRepository : BaseRepository, IUserRepository {
     override fun delete(entity: User?): Boolean {
         val session = getCurrentSession()
         try{
-            session.delete(entity)
+            val user = session.get(User::class.java, entity?.id)
+            session.delete(user)
             return true
         } catch(ex:Exception){
             return false
