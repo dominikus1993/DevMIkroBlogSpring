@@ -18,8 +18,8 @@ const appModule = angular.module("devmikroblog", ["ngRoute"])
     .factory("UserService", ["$http", ($http) => new Services.UserService($http)])
     .controller("PostController", ["$scope", "PostService", "UserService", ($scope, postService, userService) => new Controllers.PostController($scope, postService, userService, Model.PostMode.AllPost)])
     .controller("PostByIdController", ["$routeParams", "$scope", "PostService", "UserService", ($routeParams, $scope, postService, userService) => new Controllers.PostController($scope, postService, userService, Model.PostMode.PostById, $routeParams.postId)])
-    .controller("UserController", ["$scope", "UserService", ($scope, userService) => new Controllers.UserController($scope, userService, Model.UserMode.None)])
-    .controller("AdminController", ["$scope", "UserService", ($scope, userService) => new Controllers.UserController($scope, userService, Model.UserMode.AllUsers)]);
+    .controller("UserController", ["$scope", "$q","UserService", ($scope, $q,userService) => new Controllers.UserController($scope, $q, userService, Model.UserMode.None)])
+    .controller("AdminController", ["$scope", "$q","UserService", ($scope, $q,userService) => new Controllers.UserController($scope, $q, userService, Model.UserMode.AllUsers)]);
 
 
 
