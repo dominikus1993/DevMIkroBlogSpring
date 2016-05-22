@@ -7,7 +7,7 @@ module Controllers {
         public users:Model.User[];
         public loggedUser:Model.User;
 
-        constructor(private scope:ng.IScope, private $q:angular.IQService, private userService:Services.IUserService, userMode:Model.UserMode) {
+        constructor(private scope:ng.IScope, private $q:angular.IQService,private $cookies: angular.cookies.ICookiesService, private userService:Services.IUserService, userMode:Model.UserMode) {
             this.getLoggedUser().then((res : Model.User) => {
                 if(res.role == "ADMIN" || userMode == Model.UserMode.None){
                     this.resolve(userMode);
@@ -33,12 +33,16 @@ module Controllers {
             }
         }
 
-        getAllUsers() {
+        public getAllUsers() {
             this.userService.getAllUsers((res) => {
                 if (res.status === 200 && res.data.success) {
                     this.users = res.data.value;
                 }
             });
+        }
+        
+        public logout(){
+            location.href = "/logout";
         }
 
         public getLoggedUser() {

@@ -25,18 +25,10 @@
                 <li><a href="#!/Tag/javascript">Javascript</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right" id="logOff">
-                <li style="color: white;"><a href="#">Witaj! <i>Dominik</i></a>
+                <li style="color: white;"><a href="#">Witaj! <i>{{account.loggedUser.login}}</i></a>
                 </li>
                 <li>
-                    <button class="btn btn-primary" ng-click="account.logout()" ng-show="$root.isLogged">Wyloguj się
-                    </button>
-                </li>
-                <li>
-                    <button class="btn btn-primary" ng-click="account.logout()" ng-show="$root.isLogged">Wyloguj się
-                    </button>
-                </li>
-                <li>
-                    <button class="btn btn-primary" ng-click="account.logout()" ng-show="$root.isLogged">Wyloguj się
+                    <button class="btn btn-primary" ng-click="account.logout()">Wyloguj się
                     </button>
                 </li>
             </ul>

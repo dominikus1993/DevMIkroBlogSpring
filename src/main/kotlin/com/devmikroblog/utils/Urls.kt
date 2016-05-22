@@ -6,6 +6,6 @@ package com.devmikroblog.utils
 
 class Urls{
     companion object {
-        val Logout = "api/auth/logout"
+        val Logout = "/logout"
     }
 }

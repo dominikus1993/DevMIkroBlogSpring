@@ -7,7 +7,7 @@
 ///<reference path="route.ts"/>
 
 
-const appModule = angular.module("devmikroblog", ["ngRoute"])
+const appModule = angular.module("devmikroblog", ["ngRoute", "ngCookies"])
     .config(($routeProvider:angular.route.IRouteProvider) => {
         $routeProvider.when("/", {templateUrl: "/all.html"})
             .when("/Post/:postId", { templateUrl: "/post.html"})
@@ -18,8 +18,8 @@ const appModule = angular.module("devmikroblog", ["ngRoute"])
     .factory("UserService", ["$http", ($http) => new Services.UserService($http)])
     .controller("PostController", ["$scope", "PostService", "UserService", ($scope, postService, userService) => new Controllers.PostController($scope, postService, userService, Model.PostMode.AllPost)])
     .controller("PostByIdController", ["$routeParams", "$scope", "PostService", "UserService", ($routeParams, $scope, postService, userService) => new Controllers.PostController($scope, postService, userService, Model.PostMode.PostById, $routeParams.postId)])
-    .controller("UserController", ["$scope", "$q","UserService", ($scope, $q,userService) => new Controllers.UserController($scope, $q, userService, Model.UserMode.None)])
-    .controller("AdminController", ["$scope", "$q","UserService", ($scope, $q,userService) => new Controllers.UserController($scope, $q, userService, Model.UserMode.AllUsers)]);
+    .controller("UserController", ["$scope", "$q","$cookies" ,"UserService", ($scope, $q, $cookies, userService) => new Controllers.UserController($scope, $q, $cookies, userService, Model.UserMode.None)])
+    .controller("AdminController", ["$scope", "$q", "$cookies", "UserService", ($scope, $q, $cookies, userService) => new Controllers.UserController($scope, $q, $cookies, userService, Model.UserMode.AllUsers)]);
 
 
 
