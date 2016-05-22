@@ -6,10 +6,7 @@ import com.devmikroblog.model.UserForCreating
 import com.devmikroblog.services.interfaces.IUserService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestMethod
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import java.security.Principal
 
 /**
@@ -33,5 +30,14 @@ class IdentityController : BaseController() {
     fun getAll(principal: Principal): Result<List<User>?>{
         val user = getUser(principal)
         return userService.getAll(user.value as User)
+    }
+
+    @RequestMapping(method = arrayOf(RequestMethod.DELETE), value = "deleteUser/{userId}")
+    fun delete(@PathVariable userId:Int, principal: Principal): Result<Boolean>{
+        val user = getUser(principal)
+        if(user.isSuccess){
+            return userService.deleteUser(userId, user.value as User)
+        }
+        return Result(false)
     }
 }

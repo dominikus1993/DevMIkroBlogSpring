@@ -17,4 +17,5 @@ interface IUserService {
     fun changeRole(userId: Int, role: Role): Result<Boolean>
     fun isOwner(postId: Int, userId: Int): Result<Boolean>
     fun getUserBuUserName(username: String?): Result<User?>
+    fun deleteUser(userId: Int, user: User): Result<Boolean>
 }

@@ -38,6 +38,11 @@ open class UserRepository : BaseRepository, IUserRepository {
         }
     }
 
+    override fun getById(userId: Int): User? {
+        val session = getCurrentSession()
+        return session.get(User::class.java, userId) as? User
+    }
+
     override fun getUserByUsername(username: String): User? {
         val session = getCurrentSession()
         val user = session.createCriteria(User::class.java).add(Restrictions.eq("login", username)).uniqueResult() as User?
@@ -80,7 +85,13 @@ open class UserRepository : BaseRepository, IUserRepository {
     }
 
     override fun delete(entity: User?): Boolean {
-        throw UnsupportedOperationException()
+        val session = getCurrentSession()
+        try{
+            session.delete(entity)
+            return true
+        } catch(ex:Exception){
+            return false
+        }
     }
 
     override fun isOwner(postId: Int, userId: Int): Boolean {

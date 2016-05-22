@@ -35,6 +35,14 @@ public class UserService : IUserService, UserDetailsService {
         return Result(null, listOf("Unauthorized access"))
     }
 
+    override fun deleteUser(userId: Int, user: User) : Result<Boolean>{
+        val userFromDb = userRepository.getById(userId)
+        if(userFromDb != null && user.role == Role.ADMIN){
+            return Result.ErrorWhenNoData(userRepository.delete(userFromDb))
+        }
+        return Result(false)
+    }
+
     override fun loadUserByUsername(username: String?): UserDetails? {
         return userRepository.getUserByUsername(username as String)
     }

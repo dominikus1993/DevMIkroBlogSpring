@@ -14,4 +14,5 @@ public interface IUserRepository : ICrudable<User>{
     fun changeRole(userId: Int, role: Role):Boolean
     fun isOwner(postId: Int, userId: Int): Boolean
     fun getUserByUsername(username: String) : User?
+    fun getById(userId: Int):User?
 }
