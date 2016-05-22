@@ -25,6 +25,13 @@ public class UserService : IUserService, UserDetailsService {
         this.userRepository = userRepository
     }
 
+    override fun getAll(user: User): Result<List<User>?> {
+        if(user.role == Role.ADMIN){
+            return Result.ErrorWhenNoData(userRepository.read())
+        }
+        return Result(null, listOf("Unauthorized access"))
+    }
+
     override fun loadUserByUsername(username: String?): UserDetails? {
         return userRepository.getUserByUsername(username as String)
     }

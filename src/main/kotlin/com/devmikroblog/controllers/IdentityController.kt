@@ -28,4 +28,10 @@ class IdentityController : BaseController() {
     fun register(@RequestBody user:UserForCreating) : Result<Boolean> {
         return userService.register(user)
     }
+
+    @RequestMapping(method = arrayOf(RequestMethod.GET), value = "getAllUsers")
+    fun getAll(principal: Principal): Result<List<User>?>{
+        val user = getUser(principal)
+        return userService.getAll(user.value as User)
+    }
 }
