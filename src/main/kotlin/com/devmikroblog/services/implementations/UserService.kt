@@ -9,6 +9,7 @@ import com.devmikroblog.services.interfaces.IUserService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import java.util.function.Predicate
 
@@ -19,10 +20,12 @@ import java.util.function.Predicate
 public class UserService : IUserService, UserDetailsService {
 
     private val userRepository: IUserRepository;
+    private val passwordEncoder: PasswordEncoder;
 
     @Autowired
-    constructor(userRepository: IUserRepository) {
+    constructor(userRepository: IUserRepository, passwordEncoder: PasswordEncoder) {
         this.userRepository = userRepository
+        this.passwordEncoder = passwordEncoder;
     }
 
     override fun getAll(user: User): Result<List<User>?> {
@@ -48,6 +51,7 @@ public class UserService : IUserService, UserDetailsService {
         val userByUsername = loadUserByUsername(user.username)
 
         if(user.password.equals(user.confirmPassword) && userByUsername == null){
+            user.password = passwordEncoder.encode(user.password);
             val result = userRepository.register(UserForCreating.toUser(user))
             return Result.ErrorWhenNoData(result)
         }

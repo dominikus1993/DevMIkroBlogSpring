@@ -7,6 +7,7 @@ import com.devmikroblog.model.User
 import com.devmikroblog.repositories.interfaces.IPostRepository
 import com.devmikroblog.services.interfaces.IPostService
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import java.util.function.Function
 import java.util.function.Predicate
