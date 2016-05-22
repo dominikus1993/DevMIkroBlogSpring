@@ -6,6 +6,7 @@ module Services{
         login():void;
         register():void;
         getLoggedUser(callback: (result: Model.HttpData<User>) => void):void;
+        getAllUsers(callback: (result: Model.HttpData<User[]>) => void):void;
     }
 
     export class UserService implements IUserService{
@@ -28,6 +29,14 @@ module Services{
             }).catch(error => {
                console.error(error);
             });
+        }
+
+        getAllUsers(callback: (result: Model.HttpData<User[]>) => void):void{
+            this.$http.get(Urls.getAllUsers).then( (res : Model.HttpData<User[]>) => {
+                callback(res);
+            }).catch(error => {
+                console.error(error);
+            })
         }
     }
 }

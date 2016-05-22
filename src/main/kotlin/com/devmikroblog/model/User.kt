@@ -81,7 +81,7 @@ public class User(): UserDetails, Serializable{
     var activated = false
         @NotNull
         @Column(nullable = false)
-        @JsonIgnore
+        @JsonProperty(access = JsonProperty.Access.READ_ONLY)
         get
         set
 

@@ -21,6 +21,7 @@ module Model{
     export class User{
         public id:number = 0;
         public login:string = "";
+        public activated:boolean = false;
         public role: "USER" | "ADMIN"
     }
 
@@ -49,5 +50,11 @@ module Model{
     export enum PostMode{
         AllPost,
         PostById
+    }
+
+    export enum UserMode{
+        AllUsers,
+        UserById,
+        None
     }
 }

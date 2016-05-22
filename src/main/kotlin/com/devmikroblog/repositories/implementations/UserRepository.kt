@@ -67,7 +67,7 @@ open class UserRepository : BaseRepository, IUserRepository {
     @Suppress("UNCHECKED_CAST")
     override fun read(): List<User>? {
         val session = getCurrentSession()
-        return session.createCriteria(Post::class.java).list() as List<User>
+        return session.createCriteria(User::class.java).list() as List<User>
     }
 
 
