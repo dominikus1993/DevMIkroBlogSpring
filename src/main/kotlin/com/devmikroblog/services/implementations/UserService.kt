@@ -71,8 +71,17 @@ public class UserService : IUserService, UserDetailsService {
         throw UnsupportedOperationException()
     }
 
-    override fun changeRole(userId: Int, role: Role): Result<Boolean> {
-        throw UnsupportedOperationException()
+    override fun changeRole(userId: Int, role: Role, user:User): Result<Boolean> {
+        val userFromDb = userRepository.getById(userId)
+        if(userFromDb != null && user.role == Role.ADMIN){
+            if(userFromDb.role != role){
+                return Result.ErrorWhenNoData(userRepository.changeRole(userId, role))
+            }
+            else{
+                return Result(true)
+            }
+        }
+        return Result(false)
     }
 
     override fun isOwner(postId: Int, userId: Int): Result<Boolean> {

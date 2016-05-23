@@ -1,6 +1,7 @@
 package com.devmikroblog.controllers
 
 import com.devmikroblog.model.Result
+import com.devmikroblog.model.Role
 import com.devmikroblog.model.User
 import com.devmikroblog.model.UserForCreating
 import com.devmikroblog.services.interfaces.IUserService
@@ -37,6 +38,16 @@ class IdentityController : BaseController() {
         val user = getUser(principal)
         if(user.isSuccess){
             return userService.deleteUser(userId, user.value as User)
+        }
+        return Result(false)
+    }
+
+    @RequestMapping(method = arrayOf(RequestMethod.GET), value = "changeRole/{userId}/{role},")
+    fun changeRole(@PathVariable userId: Int, @PathVariable role:String, principal: Principal):Result<Boolean>{
+        val roleEnum = Role.valueOf(role)
+        val user = getUser(principal)
+        if(user.isSuccess){
+            return userService.changeRole(userId, roleEnum, user.value as User)
         }
         return Result(false)
     }
