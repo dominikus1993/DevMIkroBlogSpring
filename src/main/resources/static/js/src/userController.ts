@@ -4,10 +4,11 @@
 module Controllers {
     import User = Model.User;
     import getLoggedUser = Urls.getLoggedUser;
+    import Role = Model.Role;
     export class UserController {
         public users:Model.User[];
         public loggedUser:Model.User;
-
+        public
         constructor(private scope:ng.IScope, private $q:angular.IQService,private $cookies: angular.cookies.ICookiesService, private userService:Services.IUserService, userMode:Model.UserMode) {
             this.getLoggedUser().then((res : Model.User) => {
                 if(res.role == "ADMIN" || userMode == Model.UserMode.None){
@@ -58,7 +59,16 @@ module Controllers {
             }
 
         }
-        
+
+        public changeRole(userId:number){
+            const newRoleName : Model.Role = _.head(_.filter(this.users, x => x.id == userId)).role == "USER" ? "ADMIN" : "USER";
+            this.userService.changeRole(userId, newRoleName, (res: Model.HttpData<boolean>) => {
+                if(res.status == 200 && res.data.success && res.data.value){
+                    _.head(_.filter(this.users, x => x.id == userId)).role = newRoleName;
+                }
+            });
+        }
+
         public logout(){
             location.href = "/logout";
         }

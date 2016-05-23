@@ -8,6 +8,7 @@ module Services{
         getLoggedUser(callback: (result: Model.HttpData<User>) => void):void;
         getAllUsers(callback: (result: Model.HttpData<User[]>) => void):void;
         deleteUser(userId:number, callback: (result : Model.HttpData<boolean>) => void);
+        changeRole(userId:number, role: Model.Role, callback : (result : Model.HttpData<boolean>) => void);
     }
 
     export class UserService implements IUserService{
@@ -49,6 +50,14 @@ module Services{
             }).catch(error => {
                 console.error(error);
             })
+        }
+
+        changeRole(userId:number, role: Model.Role, callback : (result : Model.HttpData<boolean>) => void){
+            return this.$http.get(Urls.changeRole(userId, role)).then((res : Model.HttpData<boolean>) => {
+               callback(res);
+            }).catch(error => {
+                console.error(error);
+            });
         }
     }
 }

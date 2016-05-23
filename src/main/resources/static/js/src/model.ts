@@ -1,52 +1,50 @@
 
 module Model{
-    export class Result<T>{
+    export type Role = "ADMIN" | "USER";
+    
+    export interface Result<T>{
         value:T;
         success:boolean;
     }
 
-    export class HttpData<T>{
-        public config:any;
-        public data: Result<T>;
-        public status:number;
-        public statusText:string;
+    export interface HttpData<T>{
+        config:any;
+        data: Result<T>;
+        status:number;
+        statusText:string;
     }
 
-    export class UserForLogin{
-        public userName:string = "";
-        public password:string = "";
-        public isRemember:boolean = true;
+    export interface UserForLogin{
+         userName:string;
+         password:string;
+         isRemember:boolean;
     }
 
-    export class User{
-        public id:number = 0;
-        public login:string = "";
-        public activated:boolean = false;
-        public creationDate:Date;
-        public role: "USER" | "ADMIN"
+    export interface User{
+         id:number;
+         login:string;
+         activated:boolean;
+         creationDate:Date;
+         role: Role
     }
 
-    export class Post{
-        public id: number = 0;
-        public message: string = "";
-        public rate: number = 0;
-        public creationDate:Date;
-        public author:User;
-        public comments: Post[];
+    export interface Post{
+         id: number;
+         message: string;
+         rate: number;
+         creationDate:Date;
+         author:User;
+         comments: Post[];
     }
 
-    export class PostToCreation{
-        public message:string = ""
+    export interface PostToCreation{
+         message:string;
     }
 
-    export class PostToUpdate{
-        public id:number = 0;
-        public message:string = "";
+    export interface PostToUpdate{
+        id:number;
+        message:string;
 
-        constructor(id?: number, message?: string) {
-            this.id = id;
-            this.message = message;
-        }
     }
 
     export enum PostMode{

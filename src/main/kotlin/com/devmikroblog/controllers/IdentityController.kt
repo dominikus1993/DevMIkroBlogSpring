@@ -42,8 +42,8 @@ class IdentityController : BaseController() {
         return Result(false)
     }
 
-    @RequestMapping(method = arrayOf(RequestMethod.GET), value = "changeRole/{userId}/{role},")
-    fun changeRole(@PathVariable userId: Int, @PathVariable role:String, principal: Principal):Result<Boolean>{
+    @RequestMapping(method = arrayOf(RequestMethod.GET), value = "changeRole/{userId}/{role}")
+    fun changeRole(@PathVariable("userId") userId: Int, @PathVariable("role") role:String, principal: Principal):Result<Boolean>{
         val roleEnum = Role.valueOf(role)
         val user = getUser(principal)
         if(user.isSuccess){

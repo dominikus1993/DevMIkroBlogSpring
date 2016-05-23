@@ -61,7 +61,7 @@ open class UserRepository : BaseRepository, IUserRepository {
     }
 
     override fun changeRole(userId: Int, role: Role): Boolean {
-        val hql = "update users set role = :role where id = :id"
+        val hql = "update User set role = :role where id = :id"
         val session = getCurrentSession()
         val query = session.createQuery(hql)
         query.setString("role", role.role)

@@ -9,5 +9,6 @@ module Urls{
     export const deleteUser = (userId:number) => `/api/auth/deleteUser/${userId}`;
     export const getPostById = (id:number) => `/api/post/get/${id}`;
     export const updatePost = "api/post/update";
+    export const changeRole = (userId:number, role : "ADMIN" | "USER") => `api/auth/changeRole/${userId}/${role}`;
     export const SessionCookie = "SESSION";
 }

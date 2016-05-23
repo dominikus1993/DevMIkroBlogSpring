@@ -40,7 +40,7 @@ module Controllers{
         }
 
         public isEdited() {
-            this.postToUpdate = new Model.PostToUpdate(this.post.id,  this.post.message);
+            this.postToUpdate = { id : this.post.id, message: this.post.message};
             this.toUpdate = !this.toUpdate;
             console.log(this.toUpdate)
         }
@@ -67,7 +67,7 @@ module Controllers{
                 this.postService.create(this.postToCreation, (data : Model.HttpData<Model.Post>) => {
                     if(data.status == 200 && data.data.success){
                         this.posts = [data.data.value].concat(this.posts);
-                        this.postToCreation = new PostToCreation();
+                        this.postToCreation = {message : ""};
                     }
                 });
             }
