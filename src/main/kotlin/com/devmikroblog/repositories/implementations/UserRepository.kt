@@ -61,7 +61,17 @@ open class UserRepository : BaseRepository, IUserRepository {
     }
 
     override fun changeRole(userId: Int, role: Role): Boolean {
-        throw UnsupportedOperationException()
+        val hql = "update users set role = :role where id = :id"
+        val session = getCurrentSession()
+        val query = session.createQuery(hql)
+        query.setString("role", role.role)
+        query.setInteger("id", userId)
+        try{
+            val updateResult = query.executeUpdate()
+            return true
+        }catch(ex:Exception){
+            return false
+        }
     }
 
     override fun read(predicate: Predicate<User>): User? {
