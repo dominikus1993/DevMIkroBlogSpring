@@ -5,6 +5,7 @@ module Controllers {
     import User = Model.User;
     import getLoggedUser = Urls.getLoggedUser;
     import Role = Model.Role;
+
     export class UserController {
         public users:Model.User[];
         public loggedUser:Model.User;
@@ -61,12 +62,17 @@ module Controllers {
         }
 
         public changeRole(userId:number){
-            const newRoleName : Model.Role = _.head(_.filter(this.users, x => x.id == userId)).role == "USER" ? "ADMIN" : "USER";
-            this.userService.changeRole(userId, newRoleName, (res: Model.HttpData<boolean>) => {
-                if(res.status == 200 && res.data.success && res.data.value){
-                    _.head(_.filter(this.users, x => x.id == userId)).role = newRoleName;
+            if(this.loggedUser.role == "ADMIN") {
+                const newRoleName:Model.Role = _.head(_.filter(this.users, x => x.id == userId)).role == "USER" ? "ADMIN" : "USER";
+                this.userService.changeRole(userId, newRoleName, (res:Model.HttpData<boolean>) => {
+                    if (res.status == 200 && res.data.success && res.data.value) {
+                        _.head(_.filter(this.users, x => x.id == userId)).role = newRoleName;
+                    }
+                })
+            } else{
+                    alert("Nie masz uprawnień do wykonania tej operacji");
+                    location.href = "/";
                 }
-            });
         }
 
         public logout(){
